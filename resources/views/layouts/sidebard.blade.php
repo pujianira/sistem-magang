@@ -1,10 +1,9 @@
-<!-- Sidebar Pembina -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar Pembina</title>
+    <title>Sidebar Pendaftar</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     
@@ -99,23 +98,23 @@
         <div class="profile-section">
             <div class="profile-image"></div>
             <div class="profile-info">
-                <p class="mb-1">Nama Pembina Magang</p>
-                <p>NIP. 1234567890</p>
+                <p class="mb-1">Nama Pendaftar Magang</p>
+                <p>NIS/NIM. 1234567890</p>
             </div>
         </div>
 
         <nav class="nav-menu">
-            <a href="/pembina/dashboard" class="menu-item" id="dashboardLink">
+            <a href="/pendaftar/dashboard" class="menu-item" id="dashboardLink">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="/pembina/pendaftarmagang" class="menu-item" id="pendaftarLink">
-                <i class="fas fa-user-plus"></i>
-                <span>Pendaftar</span>
+            <a href="#" class="menu-item" id="pendaftarLink">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Daftar Magang</span>
             </a>
             <a href="#" class="menu-item" id="pesertaLink">
-                <i class="fas fa-users"></i>
-                <span>Peserta Magang</span>
+                <i class="fas fa-file-alt"></i>
+                <span>Laporan</span>
             </a>
             <a href="#" class="menu-item" id="logoutLink">
                 <i class="fas fa-sign-out-alt"></i>

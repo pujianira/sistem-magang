@@ -25,7 +25,7 @@
         <div class="flex-1 p-6 overflow-y-auto">
             <div class="relative mb-6">
                 <!-- Welcome Banner -->
-                <img src="img/orangwelcome.png" alt="Illustration of a person waving" class="absolute -top-12 right-0 w-60 h-40">
+                <img src="{{ asset('img/orangwelcome.png') }}" alt="Illustration of a person waving" class="absolute -top-12 right-0 w-60 h-40">
                 <div class="bg-gradient-to-t from-[#1B7691] to-[#10BCEF] text-white p-10 rounded-md flex items-center mb-6 mt-8">
                     <h2 class="text-2xl font-bold">Selamat datang, Pembina Magang!</h2>
                 </div>

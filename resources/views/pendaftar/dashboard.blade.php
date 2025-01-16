@@ -20,39 +20,12 @@
 <body class="bg-gray-100 text-gray-800">
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="w-1/5 bg-[#022539] text-white p-6">
-            <div class="text-center mb-8">
-                <h1 class="text-xl font-bold">MAGANG DISKOMINFO</h1>
-            </div>
-            <div class="flex flex-col items-center mb-8">
-                <div class="w-24 h-24 bg-gray-300 rounded-full mb-4"></div>
-                <p class="text-center">Nama Pendaftar Magang</p>
-                <p class="text-center">NIM. 1234567890</p>
-            </div>
-            <nav class="space-y-4">
-                <a href="#" class="flex items-center space-x-2 py-2 px-4 bg-white text-[#022539] rounded-md font-bold">
-                    <i class="fas fa-home"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#" class="flex items-center space-x-2 py-2 px-4 text-gray-400 hover:text-white">
-                    <i class="fas fa-clipboard-list"></i>
-                    <span>Daftar Magang</span>
-                </a>
-                <a href="#" class="flex items-center space-x-2 py-2 px-4 text-gray-400 hover:text-white">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Laporan</span>
-                </a>
-                <a href="#" class="flex items-center space-x-2 py-2 px-4 text-gray-400 hover:text-white">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Log Out</span>
-                </a>
-            </nav>
-        </div>
+        @include('layouts.sidebard')
         <!-- Main Content -->
         <div class="flex-1 p-6 overflow-y-auto">
             <div class="relative mb-6">
                 <!-- Welcome Banner -->
-                <img src="img/orangwelcome.png" alt="Illustration of a person waving" class="absolute -top-12 right-0 w-60 h-40">
+                <img src="{{ asset('img/orangwelcome.png') }}" alt="Illustration of a person waving" class="absolute -top-12 right-0 w-60 h-40">
                 <div class="bg-gradient-to-t from-[#1B7691] to-[#10BCEF] text-white p-10 rounded-md flex items-center mb-6 mt-8">
                     <h2 class="text-2xl font-bold">Selamat datang, Pendaftar Magang!</h2>
                 </div>
