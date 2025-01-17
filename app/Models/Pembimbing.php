@@ -9,7 +9,7 @@ class Pembimbing extends Model
     protected $table = 'pembimbing';
     public $timestamps = false;
 
-    protected $fillable = ['nip', 'user_id', 'bidang', 'kuota_pendaftar', 'id_bidang'];
+    protected $fillable = ['nip', 'user_id', 'nama_bidang', 'id_bidang', 'kuota_pendaftar'];
     
     public function user()
     {
