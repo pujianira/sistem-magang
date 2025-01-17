@@ -15,6 +15,9 @@ Route::get('/pembina/dashboard', function () {
 Route::get('/pembina/pendaftarmagang', function () {
     return view('pembina.pendaftarmagang'); 
 });
+Route::get('/pembina/infopendaftar', function () {
+    return view('pembina.infopendaftar'); 
+});
 
 //pembimbing
 Route::get('/pembimbing/dashboard', function () {

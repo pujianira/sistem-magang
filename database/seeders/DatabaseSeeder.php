@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
-            PembinaSeeder::class,
+            //PembinaSeeder::class,
+            PeriodeSeeder::class,
+            BidangSeeder::class,
         ]);
     }
 }

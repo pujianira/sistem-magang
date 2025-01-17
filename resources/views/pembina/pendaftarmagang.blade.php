@@ -70,7 +70,11 @@
                                         <td class="py-2 px-3 text-sm border">Teknologi Informasi</td>
                                         <td class="py-2 px-3 text-sm border">2025-01-10</td>
                                         
-                                        <td class="py-2 px-3 text-sm border text-center"><i class="fas fa-eye text-blue-600 cursor-pointer"></i></td>
+                                        <td class="py-2 px-3 text-sm border text-center">
+                                            <a href="/pembina/infopendaftar" class="text-blue-600">
+                                                <i class="fas fa-eye cursor-pointer"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                     <tr class="odd:bg-gray-100 even:bg-gray-200">
                                         <td class="py-2 px-3 text-sm border text-center">2</td>
