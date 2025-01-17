@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nama_bidang', 50);
             $table->string('id_bidang', 10);
             $table->foreign('id_bidang')->references('id_bidang')->on('bidang')->onDelete('cascade');
+            $table->integer('kuota_pendaftar');
         });
     }
 
