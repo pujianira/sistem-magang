@@ -113,7 +113,7 @@
                 <i class="fas fa-user-plus"></i>
                 <span>Pendaftar</span>
             </a>
-            <a href="#" class="menu-item" id="pesertaLink">
+            <a href="/pembina/pesertamagang" class="menu-item" id="pesertaLink">
                 <i class="fas fa-users"></i>
                 <span>Peserta Magang</span>
             </a>
