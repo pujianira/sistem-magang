@@ -9,7 +9,7 @@ class Pendaftar extends Model
     protected $table = 'pendaftar';
     public $timestamps = false;
 
-    protected $fillable = ['nim_nisn', 'user_id', 'nik', 'ttl', 'jenis_kelamin', 'agama', 'universitas_sekolah', 'jurusan', 'surat_permohonan', 'proposal', 'curriculum_vitae', 'laporan', 'periode', 'id_bidang', 'bidang', 'status_penerimaan', 'status_kelulusan', 'nip_pembina', 'nip_pembimbing'];
+    protected $fillable = ['nim_nisn', 'user_id', 'nik', 'ttl', 'jenis_kelamin', 'agama', 'universitas_sekolah', 'jurusan', 'surat_permohonan', 'proposal', 'curriculum_vitae', 'laporan', 'periode', 'id_bidang', 'nama_bidang', 'status_penerimaan', 'status_kelulusan', 'nip_pembina', 'nip_pembimbing'];
     
     public function user()
     {

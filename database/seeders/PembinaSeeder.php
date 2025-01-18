@@ -19,7 +19,7 @@ class PembinaSeeder extends Seeder
             [
                 'nama' => 'Nirwana',
                 'email' => 'nirwana_pembina@gmail.com',
-                'password' => 'nirwana_pembinapass', 
+                'password' => 'nirwana_pembinapass123', 
                 'no_hp' => '082536471812',
                 'alamat' => 'Jalan Melati Nomor 2',
                 'nip' => '198002261784042001',
@@ -27,7 +27,7 @@ class PembinaSeeder extends Seeder
             [
                 'nama' => 'Ahmadi',
                 'email' => 'ahmadi_pembina@gmail.com',
-                'password' => 'ahmadi_pembinapass', 
+                'password' => 'ahmadi_pembinapass123', 
                 'no_hp' => '081525213845',
                 'alamat' => 'Jalan Tulip Nomor 8',
                 'nip' => '198201251673022041',

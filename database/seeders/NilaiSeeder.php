@@ -14,14 +14,14 @@ class NilaiSeeder extends Seeder
     {
         $nilaiData = [
             [
-                '2406012212032', 'kehadiran', 'ketepatanwaktu', 'sikapkerja_prosedurkerja', 'kemampuanbekerjadlmtim',
-                'kreativitaskerja', 'inisiatifkerja', 'kemampuankomunikasi', 'kemampuanteknikal',
-                'kepercayaandiri', 'penampilan_kerapihan'
+                '24060122120024', null, null, null, null,
+                null, null, null, null,
+                null, null
             ],
             [
-                'nim', 'kehadiran', 'ketepatanwaktu', 'sikapkerja_prosedurkerja', 'kemampuanbekerjadlmtim',
-                'kreativitaskerja', 'inisiatifkerja', 'kemampuankomunikasi', 'kemampuanteknikal',
-                'kepercayaandiri', 'penampilan_kerapihan'
+                '24060121130054', null, null, null, null,
+                null, null, null, null,
+                null, null
             ],
         ];
 

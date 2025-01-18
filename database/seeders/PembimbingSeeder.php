@@ -19,7 +19,7 @@ class PembimbingSeeder extends Seeder
             [
                 'nama' => 'Alaskara Cahya',
                 'email' => 'alaskara_pembimbing@gmail.com',
-                'password' => 'alaskara_pembimbingpass', 
+                'password' => 'alaskara_pembimbingpass123', 
                 'nohp' => '081245471022',
                 'alamat' => 'Jalan Anggrek Nomor 4',
                 'nip' => '199012021643029081',
@@ -30,7 +30,7 @@ class PembimbingSeeder extends Seeder
             [
                 'nama' => 'Ghaaziy Ahmad',
                 'email' => 'ghaaziy_pembimbing@gmail.com',
-                'password' => 'ghaaziy_pembimbingpass', 
+                'password' => 'ghaaziy_pembimbingpass123', 
                 'nohp' => '082135112735',
                 'alamat' => 'Jalan Kenanga Nomor 1',
                 'nip' => '199703101243112031',
