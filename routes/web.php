@@ -8,23 +8,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-//pendaftar
-Route::get('/pendaftar/dashboard', function () {
-    return view('pendaftar/dashboard');
-});
+
 //pembina
-Route::get('/pembina/dashboard', function () {
-    return view('pembina/dashboard');
+Route::middleware(['auth', 'Pembina'])->group(function () {
+    Route::get('/pembina/beranda', [HomeController::class, 'berandaPembina'])->name('beranda-Pembina'); 
 });
+
 Route::get('/pembina/infopendaftar', function () {
     return view('pembina.infopendaftar'); 
 });
@@ -37,23 +35,17 @@ Route::get('/pembina/pesertamagang', function () {
 });
 
 //pembimbing
-Route::get('/pembimbing/dashboard', function () {
-    return view('pembimbing/dashboard');
+Route::middleware(['auth', 'Pembimbing'])->group(function () {
+    Route::get('/pembimbing/beranda', [HomeController::class, 'berandaPembimbing'])->name('beranda-Pembimbing'); 
 });
+
 Route::get('/pembimbing/pesertamagang', function () {
     return view('pembimbing/pesertamagang');
 });
 
-Route::middleware(['auth', 'Pembina'])->group(function () {
-    Route::get('/DPA/dekan/pembimbingakademik', [HomeController::class, 'transisiDPA'])->name('transisi-DPA'); 
-});
-
-Route::middleware(['auth', 'Pembimbing'])->group(function () {
-    Route::get('/DPA/dekan/pembimbingakademik', [HomeController::class, 'transisiDPA'])->name('transisi-DPA'); 
-});
-
+//pendaftar
 Route::middleware(['auth', 'Pendaftar'])->group(function () {
-    Route::get('/DPA/dekan/pembimbingakademik', [HomeController::class, 'transisiDPA'])->name('transisi-DPA'); 
+    Route::get('/pendaftar/beranda', [HomeController::class, 'berandaPendaftar'])->name('beranda-Pendaftar'); 
 });
 
 require __DIR__.'/auth.php';

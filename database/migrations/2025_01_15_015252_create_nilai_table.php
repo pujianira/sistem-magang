@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('nilai', function (Blueprint $table) {
             $table->char('nim', 14)->primary();
-            $table->integer('kehadiran');
-            $table->integer('ketepatanwaktu'); 
-            $table->integer('sikapkerja_prosedurkerja');
-            $table->integer('kemampuanbekerjadlmtim');
-            $table->integer('kreativitaskerja');
-            $table->integer('inisiatifkerja');
-            $table->integer('kemampuankomunikasi');
-            $table->integer('kemampuanteknikal');
-            $table->integer('kepercayaandiri');
-            $table->integer('penampilan_kerapihan');
+            $table->integer('kehadiran')->nullable();
+            $table->integer('ketepatanwaktu')->nullable(); 
+            $table->integer('sikapkerja_prosedurkerja')->nullable();
+            $table->integer('kemampuanbekerjadlmtim')->nullable();
+            $table->integer('kreativitaskerja')->nullable();
+            $table->integer('inisiatifkerja')->nullable();
+            $table->integer('kemampuankomunikasi')->nullable();
+            $table->integer('kemampuanteknikal')->nullable();
+            $table->integer('kepercayaandiri')->nullable();
+            $table->integer('penampilan_kerapihan')->nullable();
         });
     }
 

@@ -8,16 +8,16 @@ class HomeController extends Controller
 {
     public function berandaPembina()
     {
-        return view('beranda-pembina');
+        return view('pembina/beranda-pembina');
     }
 
     public function berandaPembimbing()
     {
-        return view('beranda-pembimbing');
+        return view('pembimbing/beranda-pembimbing');
     }
 
     public function berandaPendaftar()
     {
-        return view('beranda-pendaftar');
+        return view('pendaftar/beranda-pendaftar');
     }
 }
