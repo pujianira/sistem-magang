@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pendaftar Magang</title>
+    <title>Peserta Magang</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
@@ -20,19 +20,16 @@
         <!-- Main Content -->
         <div class="flex-1 overflow-hidden">
             <div class="p-6">
-                <h1 class="text-2xl font-bold mb-6">Pendaftar</h1>
+                <h1 class="text-2xl font-bold mb-6">Peserta Magang</h1>
                 <div class="bg-white rounded-lg shadow-md h-[calc(100vh-120px)] overflow-auto">
                     <div class="p-6">
                         <form action="#" method="GET" class="mb-6">
                             <div class="mb-4 flex items-center">
-                                <label for="bidang" class="mr-2 w-24 font-bold">Bidang:</label>
-                                <select name="bidang" id="bidang" class="p-2 rounded bg-gray-200 text-gray-700 w-60">
-                                    <option value="">--- Pilih Bidang ---</option>
-                                    <option value="Sekretariat">Sekretariat</option>
-                                    <option value="Teknologi Informasi">Teknologi Informasi</option>
-                                    <option value="Keuangan">Keuangan</option>
-                                    <option value="Pemasaran">Pemasaran</option>
-                                    <option value="Sumber Daya Manusia">Sumber Daya Manusia</option>
+                                <label for="status" class="mr-2 w-24 font-bold">Status:</label>
+                                <select name="status" id="status" class="p-2 rounded bg-gray-200 text-gray-700 w-60">
+                                    <option value="">--- Pilih Status ---</option>
+                                    <option value="Aktif">Aktif</option>
+                                    <option value="Lulus">Lulus</option>
                                 </select>
                             </div>
                             <div class="flex space-x-4">
@@ -51,11 +48,11 @@
                                 <tr class="bg-blue-900 text-white">
                                     <th class="py-2 px-3 text-sm whitespace-nowrap border w-12">No</th>
                                     <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/4">Nama</th>
-                                    <th class="py-2 px-3 text-sm whitespace-nowrap border w-24">NIM</th>
                                     <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Universitas / Sekolah</th>
-                                    <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Jurusan</th>
-                                    <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Bidang</th>
-                                    <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Tanggal <br> Pengajuan</th>
+                                    <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Durasi Magang</th>
+                                    <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Kontak</th>
+                                    <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Periode</th>
+                                    <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Status</th>
                                     
                                     <th class="py-2 px-3 text-sm whitespace-nowrap border w-12"><i class="fas fa-search"></i></th>
                                 </tr>
@@ -70,11 +67,7 @@
                                         <td class="py-2 px-3 text-sm border">Teknologi Informasi</td>
                                         <td class="py-2 px-3 text-sm border">2025-01-10</td>
                                         
-                                        <td class="py-2 px-3 text-sm border text-center">
-                                            <a href="/pembina/infopendaftar" class="text-blue-600">
-                                                <i class="fas fa-eye cursor-pointer"></i>
-                                            </a>
-                                        </td>
+                                        <td class="py-2 px-3 text-sm border text-center"><i class="fas fa-eye text-blue-600 cursor-pointer"></i></td>
                                     </tr>
                                     <tr class="odd:bg-gray-100 even:bg-gray-200">
                                         <td class="py-2 px-3 text-sm border text-center">2</td>
