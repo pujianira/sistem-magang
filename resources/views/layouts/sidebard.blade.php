@@ -98,8 +98,8 @@
         <div class="profile-section">
             <div class="profile-image"></div>
             <div class="profile-info">
-                <p class="mb-1">Nama Pendaftar Magang</p>
-                <p>NIS/NIM. 1234567890</p>
+                <p class="mb-1">{{ $user->nama ?? 'Nama Tidak Ditemukan' }}</p>
+                <p>NIS/NIM. {{ $user->pendaftar?->nim_nisn ?? 'NIM/NISN Tidak Ditemukan' }}</p>
             </div>
         </div>
 

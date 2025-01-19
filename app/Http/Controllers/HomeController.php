@@ -20,6 +20,7 @@ class HomeController extends Controller
 
     public function berandaPendaftar()
     {
-        return view('pendaftar/beranda-pendaftar');
+        $user = auth()->user(); 
+        return view('pendaftar.beranda-pendaftar', compact('user')); 
     }
 }
