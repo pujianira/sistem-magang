@@ -28,11 +28,9 @@
                                 <label for="bidang" class="mr-2 w-24 font-bold">Bidang:</label>
                                 <select name="bidang" id="bidang" class="p-2 rounded bg-gray-200 text-gray-700 w-60">
                                     <option value="">--- Pilih Bidang ---</option>
-                                    <option value="Sekretariat">Sekretariat</option>
-                                    <option value="Teknologi Informasi">Teknologi Informasi</option>
-                                    <option value="Keuangan">Keuangan</option>
-                                    <option value="Pemasaran">Pemasaran</option>
-                                    <option value="Sumber Daya Manusia">Sumber Daya Manusia</option>
+                                    @foreach($bidangs as $bidang)
+                                        <option value="{{ $bidang->id_bidang }}">{{ $bidang->nama }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="flex space-x-4">
