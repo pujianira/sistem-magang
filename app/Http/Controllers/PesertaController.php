@@ -11,4 +11,10 @@ class PesertaController extends Controller
         $user = auth()->user(); 
         return view('pembina.pesertamagang', compact('user'));
     }
+
+    public function daftarMentee()
+    {
+        $user = auth()->user(); 
+        return view('pembimbing.pesertamagang', compact('user'));
+    }
 }

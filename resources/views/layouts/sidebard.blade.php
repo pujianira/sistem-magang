@@ -108,11 +108,11 @@
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="#" class="menu-item" id="pendaftarLink">
+            <a href="/pendaftar/daftarmagang" class="menu-item" id="pendaftarLink">
                 <i class="fas fa-clipboard-list"></i>
                 <span>Daftar Magang</span>
             </a>
-            <a href="#" class="menu-item" id="pesertaLink">
+            <a href="/pendaftar/laporanmagang" class="menu-item" id="pesertaLink">
                 <i class="fas fa-file-alt"></i>
                 <span>Laporan</span>
             </a>
