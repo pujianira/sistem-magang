@@ -104,11 +104,58 @@
         </div>
 
         <nav class="nav-menu">
-            <a href="/pendaftar/dashboard" class="menu-item" id="dashboardLink">
+            {{-- <a href="{{ route('beranda-Pendaftar') }}" class="menu-item" id="dashboardLink">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="#" class="menu-item" id="pendaftarLink">
+
+            <a href="{{ route('beranda-Pendaftar') }}" 
+                class="menu-item flex items-center p-2 rounded hover:bg-gray-200 hover:text-blue-500 font-semibold 
+                {{ request()->routeIs('beranda-Pendaftar') ? 'menu-item.active bg-gray-200 text-blue-500 font-bold' : 'text-gray-700' }}">
+                <i class="fas fa-home"></i>
+                <span>Beranda</span>
+            </a> --}}
+
+            <a href="{{ route('beranda-Pendaftar') }}" 
+                class="menu-item flex items-center p-2 rounded
+                {{ request()->routeIs('beranda-Pendaftar') ? 'active' : 'text-gray-700' }}">
+                <i class="fas fa-home"></i>
+                <span>Beranda</span>
+            </a>
+
+            <a href="#"
+                class="menu-item flex items-center p-2 rounded
+                {{ request()->routeIs('#') ? 'active' : 'text-gray-700' }}">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Daftar Magang</span>
+            </a>
+
+            <a href="#"
+                class="menu-item flex items-center p-2 rounded
+                {{ request()->routeIs('#') ? 'active' : 'text-gray-700' }}">
+                <i class="fas fa-file-alt"></i>
+                <span>Laporan</span>
+            </a>
+
+            <a href="{{ route('logout') }}" 
+                class="menu-item flex items-center p-2 rounded
+                {{ request()->routeIs('logout') ? 'active' : 'text-gray-700' }}" 
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Log Out</span>
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                @csrf
+            </form>
+            {{-- <a href="{{ route('logout') }}" 
+                class="menu-item flex items-center p-2 rounded
+                {{ request()->routeIs('logout') ? 'active' : 'text-gray-700' }}">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Log Out</span>
+            </a> --}}
+
+            {{-- <a href="#" class="menu-item" id="pendaftarLink">
                 <i class="fas fa-clipboard-list"></i>
                 <span>Daftar Magang</span>
             </a>
@@ -116,10 +163,26 @@
                 <i class="fas fa-file-alt"></i>
                 <span>Laporan</span>
             </a>
-            <a href="#" class="menu-item" id="logoutLink">
+            <a href="{{ route('logout') }}" class="menu-item" id="logoutLink">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Log Out</span>
             </a>
+            <a href="{{ route('beranda-Pendaftar') }}" 
+                class="menu-item flex items-center p-2 rounded hover:bg-gray-200 hover:text-blue-500 font-semibold 
+                {{ request()->routeIs('beranda-Pendaftar') ? 'bg-gray-200 text-blue-500 font-bold' : 'text-gray-700' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-700 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span>Beranda</span>
+            </a>
+            <a href="#" 
+                class="menu-item flex items-center p-2 rounded menu-item:hover hover:text-blue-500 font-semibold 
+                {{ request()->routeIs('#') ? 'bg-gray-200 text-blue-500 font-bold' : 'text-gray-700' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-700 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span>Beranda</span>
+            </a> --}}
         </nav>
     </div>
 
@@ -129,7 +192,7 @@
         @yield('content')
     </div>
 
-    <script>
+    {{-- <script>
     const menuItems = document.querySelectorAll('.menu-item');
 
     // Fungsi untuk mendapatkan path saat ini
@@ -161,6 +224,6 @@
     });
 
     setActiveMenu();
-    </script>
+    </script> --}}
 </body>
 </html>

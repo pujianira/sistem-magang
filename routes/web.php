@@ -30,9 +30,11 @@ Route::get('/pembina/infopendaftar', function () {
 Route::get('/pembina/pendaftarmagang', function () {
     return view('pembina.pendaftarmagang'); 
 });
+
 Route::get('/pembina/pesertamagang', function () {
     return view('pembina.pesertamagang'); 
 });
+
 
 //pembimbing
 Route::middleware(['auth', 'Pembimbing'])->group(function () {
@@ -47,5 +49,9 @@ Route::get('/pembimbing/pesertamagang', function () {
 Route::middleware(['auth', 'Pendaftar'])->group(function () {
     Route::get('/pendaftar/beranda', [HomeController::class, 'berandaPendaftar'])->name('beranda-Pendaftar'); 
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
