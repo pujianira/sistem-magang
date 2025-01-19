@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +24,8 @@ Route::middleware('auth')->group(function () {
 //pembina
 Route::middleware(['auth', 'Pembina'])->group(function () {
     Route::get('/pembina/beranda', [HomeController::class, 'berandaPembina'])->name('beranda-Pembina'); 
+    Route::get('/pembina/pendaftarmagang', [PendaftaranController::class, 'pendaftar'])->name('pendaftarmagang');
+    Route::get('/pembina/pesertamagang', [PesertaController::class, 'daftarPeserta'])->name('pesertamagang');
 });
 
 Route::get('/pembina/infopendaftar', function () {
@@ -39,15 +44,15 @@ Route::get('/pembina/pesertamagang', function () {
 //pembimbing
 Route::middleware(['auth', 'Pembimbing'])->group(function () {
     Route::get('/pembimbing/beranda', [HomeController::class, 'berandaPembimbing'])->name('beranda-Pembimbing'); 
-});
-
-Route::get('/pembimbing/pesertamagang', function () {
-    return view('pembimbing/pesertamagang');
+    Route::get('/pembimbing/pesertamagang', [PesertaController::class, 'daftarMentee'])->name('pesertamagang');
 });
 
 //pendaftar
 Route::middleware(['auth', 'Pendaftar'])->group(function () {
     Route::get('/pendaftar/beranda', [HomeController::class, 'berandaPendaftar'])->name('beranda-Pendaftar'); 
+    Route::get('/pendaftar/daftarmagang', [PendaftaranController::class, 'daftarMagang'])->name('daftarmagang'); 
+    Route::post('/pendaftar/daftarmagang', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
+    Route::get('/pendaftar/laporanmagang', [LaporanController::class, 'kirimLaporan'])->name('kirimLaporan'); 
 });
 
 Route::get('/dashboard', function () {

@@ -99,28 +99,36 @@
         <div class="profile-section">
             <div class="profile-image"></div>
             <div class="profile-info">
-                <p class="mb-1">Nama Pembimbing Magang</p>
-                <p>NIP. 1234567890</p>
+                <p class="mb-1">{{ $user->nama ?? 'Nama Tidak Ditemukan' }}</p>
+                <p>NIP. {{ $user->pembimbing?->nip ?? 'NIP Tidak Ditemukan' }}</p>
             </div>
         </div>
 
         <nav class="nav-menu">
-            <a href="/pembimbing/dashboard" class="menu-item" id="dashboardLink">
+            <a href="/pembimbing/beranda" class="menu-item" id="dashboardLink">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
-            <a href="/pembimbing/pesertamagang" class="menu-item" id="pendaftarLink">
+            <a href="/pembimbing/pesertamagang" class="menu-item" id="pesertaLink">
                 <i class="fas fa-users"></i>
                 <span>Peserta Magang</span>
             </a>
-            <a href="#" class="menu-item" id="pesertaLink">
+            <a href="#" class="menu-item" id="penilaianLink">
                 <i class="fas fa-clipboard-list"></i>
                 <span>Penilaian</span>
             </a>
-            <a href="#" class="menu-item" id="logoutLink">
+            <a href="#" 
+                class="menu-item" 
+                id="logoutLink"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Log Out</span>
             </a>
+
+            <!-- Form Logout -->
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
         </nav>
     </div>
 

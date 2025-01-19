@@ -8,16 +8,19 @@ class HomeController extends Controller
 {
     public function berandaPembina()
     {
-        return view('pembina/beranda-pembina');
+        $user = auth()->user(); 
+        return view('pembina.beranda-pembina', compact('user')); 
     }
 
     public function berandaPembimbing()
     {
-        return view('pembimbing/beranda-pembimbing');
+        $user = auth()->user(); 
+        return view('pembimbing.beranda-pembimbing', compact('user')); 
     }
 
     public function berandaPendaftar()
     {
-        return view('pendaftar/beranda-pendaftar');
+        $user = auth()->user(); 
+        return view('pendaftar.beranda-pendaftar', compact('user')); 
     }
 }

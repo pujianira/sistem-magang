@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Bidang;
+use App\Models\Pendaftar;
+use App\Models\Periode;
+
+class PendaftaranController extends Controller
+{
+    public function pendaftar()
+    {
+        $user = auth()->user(); 
+        $bidangs = Bidang::all();
+        return view('pembina.pendaftarmagang', compact('user', 'bidangs'));
+    }
+
+    public function daftarMagang() 
+    {
+        $user = auth()->user(); 
+        $bidangs = Bidang::all();
+        $periodes = Periode::all();
+        return view('pendaftar.daftarmagang', compact('user', 'bidangs', 'periodes'));
+    }
+
+    public function store(Request $request)
+    {
+        // Validasi input form
+        $validated = $request->validate([
+            'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'nama' => 'required|string|max:255',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'agama' => 'required|string',
+            'jenis_kelamin' => 'required|string',
+            'alamat' => 'required|string',
+            'no_hp' => 'required|string|max:15',
+            'cv' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            'proposal' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            'surat' => 'required|file|mimes:pdf,doc,docx|max:2048',
+        ]);
+
+        // Simpan file yang diunggah
+        $fotoPath = $request->file('foto')->store('uploads/foto');
+        $cvPath = $request->file('cv')->store('uploads/cv');
+        $proposalPath = $request->file('proposal')->store('uploads/proposal');
+        $suratPath = $request->file('surat')->store('uploads/surat');
+
+        // Simpan data ke database
+        Pendaftar::create([
+            'nama' => $validated['nama'],
+            'tempat_lahir' => $validated['tempat_lahir'],
+            'tanggal_lahir' => $validated['tanggal_lahir'],
+            'agama' => $validated['agama'],
+            'jenis_kelamin' => $validated['jenis_kelamin'],
+            'alamat' => $validated['alamat'],
+            'no_hp' => $validated['no_hp'],
+            'foto' => $fotoPath,
+            'cv' => $cvPath,
+            'proposal' => $proposalPath,
+            'surat' => $suratPath,
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Pendaftaran berhasil diajukan.');
+    }
+}
