@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,18 +23,14 @@ Route::middleware('auth')->group(function () {
 //pembina
 Route::middleware(['auth', 'Pembina'])->group(function () {
     Route::get('/pembina/beranda', [HomeController::class, 'berandaPembina'])->name('beranda-Pembina'); 
+    Route::get('/pembina/pendaftarmagang', [PendaftaranController::class, 'pendaftar'])->name('pendaftarmagang');
+    Route::get('/pembina/pesertamagang', [PesertaController::class, 'daftarPeserta'])->name('pesertamagang');
 });
 
 Route::get('/pembina/infopendaftar', function () {
     return view('pembina.infopendaftar'); 
 });
 
-Route::get('/pembina/pendaftarmagang', function () {
-    return view('pembina.pendaftarmagang'); 
-});
-Route::get('/pembina/pesertamagang', function () {
-    return view('pembina.pesertamagang'); 
-});
 
 //pembimbing
 Route::middleware(['auth', 'Pembimbing'])->group(function () {

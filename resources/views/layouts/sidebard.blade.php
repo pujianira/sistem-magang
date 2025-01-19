@@ -104,7 +104,7 @@
         </div>
 
         <nav class="nav-menu">
-            <a href="/pendaftar/dashboard" class="menu-item" id="dashboardLink">
+            <a href="/pendaftar/beranda" class="menu-item" id="dashboardLink">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
@@ -116,10 +116,18 @@
                 <i class="fas fa-file-alt"></i>
                 <span>Laporan</span>
             </a>
-            <a href="#" class="menu-item" id="logoutLink">
+            <a href="#" 
+                class="menu-item" 
+                id="logoutLink"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Log Out</span>
             </a>
+
+            <!-- Form Logout -->
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
         </nav>
     </div>
 

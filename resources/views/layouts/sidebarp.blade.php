@@ -99,13 +99,13 @@
         <div class="profile-section">
             <div class="profile-image"></div>
             <div class="profile-info">
-                <p class="mb-1">Nama Pembina Magang</p>
-                <p>NIP. 1234567890</p>
+                <p class="mb-1">{{ $user->nama ?? 'Nama Tidak Ditemukan' }}</p>
+                <p>NIP. {{ $user->pembina?->nip ?? 'NIP Tidak Ditemukan' }}</p>
             </div>
         </div>
 
         <nav class="nav-menu">
-            <a href="/pembina/dashboard" class="menu-item" id="dashboardLink">
+            <a href="/pembina/beranda" class="menu-item" id="dashboardLink">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
@@ -117,10 +117,18 @@
                 <i class="fas fa-users"></i>
                 <span>Peserta Magang</span>
             </a>
-            <a href="#" class="menu-item" id="logoutLink">
+            <a href="#" 
+                class="menu-item" 
+                id="logoutLink"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Log Out</span>
             </a>
+
+            <!-- Form Logout -->
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
         </nav>
     </div>
 
