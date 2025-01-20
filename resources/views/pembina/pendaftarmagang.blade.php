@@ -23,26 +23,28 @@
                 <h1 class="text-2xl font-bold mb-6">Pendaftar</h1>
                 <div class="bg-white rounded-lg shadow-md h-[calc(100vh-120px)] overflow-auto">
                     <div class="p-6">
-                        <form action="/pembina/filterBidang" method="GET" class="mb-6">
-                            <div class="mb-4 flex items-center">
-                                <label for="bidang" class="mr-2 w-24 font-bold">Bidang:</label>
-                                <select name="bidang" id="bidang" class="p-2 rounded bg-gray-200 text-gray-700 w-60">
-                                    <option value="">--- Pilih Bidang ---</option>
-                                    @foreach($bidangs as $bidang)
-                                        <option value="{{ $bidang->id_bidang }}">{{ $bidang->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="flex space-x-4">
-                                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-                                    Filter Data
-                                </button>
-                                <a href="/pembina/pendaftarmagang" class="bg-gray-600 text-white px-4 py-2 rounded-lg">
-                                    Reset Filter
-                                </a>
-                            </div>
-                        </form>
-                        <p class="mb-4">Total: 42</p>
+                    <form action="/pembina/filterBidang" method="GET" class="mb-6">
+                        <div class="mb-4 flex items-center">
+                            <label for="bidang" class="mr-2 w-24 font-bold">Bidang:</label>
+                            <select name="bidang" id="bidang" class="p-2 rounded bg-gray-200 text-gray-700 w-60">
+                                <option value="">--- Pilih Bidang ---</option>
+                                @foreach($bidangs as $bidang)
+                                    <option value="{{ $bidang->id_bidang }}" {{ request('bidang') == $bidang->id_bidang ? 'selected' : '' }}>
+                                        {{ $bidang->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                                Filter Data
+                            </button>
+                            <a href="/pembina/pendaftarmagang" class="bg-gray-600 text-white px-4 py-2 rounded-lg">
+                                Reset Filter
+                            </a>
+                        </div>
+                    </form>
+                        <p class="mb-4">Total: {{ $totalPendaftar }}</p>
                         <div class="w-full">
                             <table class="w-full table-auto border-collapse border border-gray-300">
                                 <thead>

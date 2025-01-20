@@ -27,6 +27,7 @@ Route::middleware(['auth', 'Pembina'])->group(function () {
     Route::get('/pembina/pendaftarmagang', [PendaftaranController::class, 'pendaftar'])->name('pendaftarmagang');
     Route::get('/pembina/pesertamagang', [PesertaController::class, 'daftarPeserta'])->name('pesertamagang');
     Route::get('/pembina/infopendaftar/{nim_nisn}', [PendaftaranController::class, 'infoPendaftar'])->name('infopendaftar');
+    Route::get('/pembina/filterBidang', [PendaftaranController::class, 'filterBidang'])->name('filter.bidang');
 });
 
 Route::get('/pembina/infopendaftar', function () {
