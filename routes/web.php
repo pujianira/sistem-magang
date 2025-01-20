@@ -11,9 +11,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -26,19 +26,14 @@ Route::middleware(['auth', 'Pembina'])->group(function () {
     Route::get('/pembina/beranda', [HomeController::class, 'berandaPembina'])->name('beranda-Pembina'); 
     Route::get('/pembina/pendaftarmagang', [PendaftaranController::class, 'pendaftar'])->name('pendaftarmagang');
     Route::get('/pembina/pesertamagang', [PesertaController::class, 'daftarPeserta'])->name('pesertamagang');
+    Route::get('/pembina/infopendaftar/{nim_nisn}', [PendaftaranController::class, 'infoPendaftar'])->name('infopendaftar');
 });
 
 Route::get('/pembina/infopendaftar', function () {
     return view('pembina.infopendaftar'); 
 });
 
-Route::get('/pembina/pendaftarmagang', function () {
-    return view('pembina.pendaftarmagang'); 
-});
 
-Route::get('/pembina/pesertamagang', function () {
-    return view('pembina.pesertamagang'); 
-});
 
 
 //pembimbing

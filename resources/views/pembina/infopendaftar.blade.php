@@ -38,105 +38,106 @@
                     </div>
 
                     <!-- Profile Information -->
-                    <div class="w-full md:w-3/3 mx-auto space-y-4">
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                    <div class="w-full md:w-3/3 mx-auto space-y-1">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Nama</h4>
-                                <p class="text-lg text-gray-800 w-2/3">Ahmad Fauzan</p>
+                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->nama }}</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Tempat / Tanggal Lahir</h4>
-                                <p class="text-lg text-gray-800 w-2/3">Bali / 28 Maret 2006</p>
+                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->tempat_lahir }} / {{ \Carbon\Carbon::parse($pendaftar->ttl)->format('d-m-Y') }}
+                                </p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Agama</h4>
-                                <p class="text-lg text-gray-800 w-2/3">Hindu</p>
+                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->agama }}</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Jenis Kelamin</h4>
-                                <p class="text-lg text-gray-800 w-2/3">Perempuan</p>
+                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->jenis_kelamin }}</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Alamat Lengkap</h4>
-                                <p class="text-lg text-gray-800 w-2/3">Jalan Candi Prambanan</p>
+                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->user->alamat }}</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">No HP</h4>
-                                <p class="text-lg text-gray-800 w-2/3">0888888</p>
+                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->user->no_hp }}</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Universitas / Sekolah</h4>
-                                <p class="text-lg text-gray-800 w-2/3">Universitas Udayana</p>
+                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->universitas_sekolah }}</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">NIM / NIS</h4>
-                                <p class="text-lg text-gray-800 w-2/3">24060122130088</p>
+                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->nim_nisn }}</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">NIK</h4>
-                                <p class="text-lg text-gray-800 w-2/3">3333333333</p>
+                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->nik }}</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Jurusan</h4>
-                                <p class="text-lg text-gray-800 w-2/3">Sistem Informasi</p>
+                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->jurusan }}</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Periode</h4>
-                                <p class="text-lg text-gray-800 w-2/3">Maret 2025</p>
+                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->bulan_mulai }} {{ $pendaftar->tahun_mulai }}</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Bidang</h4>
-                                <p class="text-lg text-gray-800 w-2/3">E-Government</p>
+                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->nama_bidang }}</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Surat Permohonan</h4>
-                                <p class="text-lg text-gray-800 w-2/3">Sistem Informasi</p>
+                                <p class="text-md text-gray-800 w-2/3">Sistem Informasi</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Proposal</h4>
-                                <p class="text-lg text-gray-800 w-2/3">Maret 2025</p>
+                                <p class="text-md text-gray-800 w-2/3">Maret 2025</p>
                             </div>
                         </div>
-                        <div class="border border-gray-200 p-3 rounded-lg mb-4">
+                        <div class="p-3 rounded-md mb-1">
                             <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Curriculum Vitae</h4>
-                                <p class="text-lg text-gray-800 w-2/3">E-Government</p>
+                                <p class="text-md text-gray-800 w-2/3">E-Government</p>
                             </div>
                         </div>
-                        <div class="flex mt-10 justify-end">
-                            <button class="bg-green-500 text-white py-2 px-6 rounded-full mr-4">
-                                Setujui Pengajuan
-                            </button>
-                            <button class="bg-red-500 text-white py-2 px-6 rounded-full">
-                                Tolak Pengajuan
-                            </button>
-                        </div>
+                    </div>
+                    <div class="flex mt-10 justify-end">
+                        <button class="bg-green-500 text-white py-2 px-6 rounded-full mr-4">
+                            Setujui Pengajuan
+                        </button>
+                        <button class="bg-red-500 text-white py-2 px-6 rounded-full">
+                            Tolak Pengajuan
+                        </button>
                     </div>
                 </div>
             </div>

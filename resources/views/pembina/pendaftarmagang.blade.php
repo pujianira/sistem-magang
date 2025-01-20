@@ -23,7 +23,7 @@
                 <h1 class="text-2xl font-bold mb-6">Pendaftar</h1>
                 <div class="bg-white rounded-lg shadow-md h-[calc(100vh-120px)] overflow-auto">
                     <div class="p-6">
-                        <form action="#" method="GET" class="mb-6">
+                        <form action="/pembina/filterBidang" method="GET" class="mb-6">
                             <div class="mb-4 flex items-center">
                                 <label for="bidang" class="mr-2 w-24 font-bold">Bidang:</label>
                                 <select name="bidang" id="bidang" class="p-2 rounded bg-gray-200 text-gray-700 w-60">
@@ -37,7 +37,7 @@
                                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
                                     Filter Data
                                 </button>
-                                <a href="#" class="bg-gray-600 text-white px-4 py-2 rounded-lg">
+                                <a href="/pembina/pendaftarmagang" class="bg-gray-600 text-white px-4 py-2 rounded-lg">
                                     Reset Filter
                                 </a>
                             </div>
@@ -53,47 +53,53 @@
                                     <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Universitas / Sekolah</th>
                                     <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Jurusan</th>
                                     <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Bidang</th>
-                                    <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Tanggal <br> Pengajuan</th>
+                                    <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Status</th>
                                     
                                     <th class="py-2 px-3 text-sm whitespace-nowrap border w-12"><i class="fas fa-search"></i></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd:bg-gray-100 even:bg-gray-200">
-                                        <td class="py-2 px-3 text-sm border text-center">1</td>
-                                        <td class="py-2 px-3 text-sm border">Ahmad Fauzan</td>
-                                        <td class="py-2 px-3 text-sm border">24060122130080</td>
-                                        <td class="py-2 px-3 text-sm border">Universitas Diponegoro</td>
-                                        <td class="py-2 px-3 text-sm border">Teknik Informatika</td>
-                                        <td class="py-2 px-3 text-sm border">Teknologi Informasi</td>
-                                        <td class="py-2 px-3 text-sm border">2025-01-10</td>
-                                        
-                                        <td class="py-2 px-3 text-sm border text-center">
-                                            <a href="/pembina/infopendaftar" class="text-blue-600">
-                                                <i class="fas fa-eye cursor-pointer"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr class="odd:bg-gray-100 even:bg-gray-200">
-                                        <td class="py-2 px-3 text-sm border text-center">2</td>
-                                        <td class="py-2 px-3 text-sm border">Siti Aisyah</td>
-                                        <td class="py-2 px-3 text-sm border">210123457</td>
-                                        <td class="py-2 px-3 text-sm border">Universitas Gadjah Mada</td>
-                                        <td class="py-2 px-3 text-sm border">Manajemen</td>
-                                        <td class="py-2 px-3 text-sm border">Keuangan</td>
-                                        <td class="py-2 px-3 text-sm border">2025-01-09</td>
-                                        <td class="py-2 px-3 text-sm border text-center"><i class="fas fa-eye text-blue-600 cursor-pointer"></i></td>
-                                    </tr>
-                                    <tr class="odd:bg-gray-100 even:bg-gray-200">
-                                        <td class="py-2 px-3 text-sm border text-center">3</td>
-                                        <td class="py-2 px-3 text-sm border">Budi Santoso</td>
-                                        <td class="py-2 px-3 text-sm border">210123458</td>
-                                        <td class="py-2 px-3 text-sm border">Institut Teknologi Bandung</td>
-                                        <td class="py-2 px-3 text-sm border">Desain Komunikasi Visual</td>
-                                        <td class="py-2 px-3 text-sm border">Pemasaran</td>
-                                        <td class="py-2 px-3 text-sm border">2025-01-08</td>
-                                        <td class="py-2 px-3 text-sm border text-center"><i class="fas fa-eye text-blue-600 cursor-pointer"></i></td>
-                                    </tr>
+                                    @foreach($pendaftarData as $index => $pendaftar)
+                                        <tr class="odd:bg-gray-100 even:bg-gray-200">
+                                            <td class="py-2 px-3 text-sm border text-center">{{ $index + 1 }}</td>
+                                            <td class="py-2 px-3 text-sm border">{{ $pendaftar->nama }}</td>
+                                            <td class="py-2 px-3 text-sm border">{{ $pendaftar->nim_nisn }}</td>
+                                            <td class="py-2 px-3 text-sm border">{{ $pendaftar->universitas_sekolah }}</td>
+                                            <td class="py-2 px-3 text-sm border">{{ $pendaftar->jurusan }}</td>
+                                            <td class="py-2 px-3 text-sm border">{{ $pendaftar->nama_bidang }}</td>
+                                            <td class="py-2 px-3 text-sm border text-center">
+                                                @switch($pendaftar->status_pendaftaran)
+                                                    @case('disetujui')
+                                                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded">
+                                                            Diterima
+                                                        </span>
+                                                        @break
+
+                                                    @case('pending')
+                                                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
+                                                            Menunggu
+                                                        </span>
+                                                        @break
+
+                                                    @case('ditolak')
+                                                        <span class="bg-red-100 text-red-800 px-2 py-1 rounded">
+                                                            Ditolak
+                                                        </span>
+                                                        @break
+
+                                                    @default
+                                                        <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded">
+                                                            Tidak diketahui
+                                                        </span>
+                                                @endswitch
+                                            </td>
+                                            <td class="py-2 px-3 text-sm border text-center">
+                                                <a href="/pembina/infopendaftar/{{ $pendaftar->nim_nisn }}" class="text-blue-600">
+                                                    <i class="fas fa-eye cursor-pointer"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

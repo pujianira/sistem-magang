@@ -13,7 +13,8 @@ class PendaftaranController extends Controller
     {
         $user = auth()->user(); 
         $bidangs = Bidang::all();
-        return view('pembina.pendaftarmagang', compact('user', 'bidangs'));
+        $pendaftarData = Pendaftar::select('nim_nisn', 'nama', 'universitas_sekolah', 'jurusan', 'nama_bidang', 'status_pendaftaran', 'status_kelulusan')->get();
+        return view('pembina.pendaftarmagang', compact('user', 'bidangs', 'pendaftarData'));
     }
 
     public function daftarMagang() 
@@ -22,6 +23,34 @@ class PendaftaranController extends Controller
         $bidangs = Bidang::all();
         $periodes = Periode::all();
         return view('pendaftar.daftarmagang', compact('user', 'bidangs', 'periodes'));
+    }
+
+    public function filterBidang(Request $request)
+    {
+        // Ambil filter bidang dari query string
+        $bidang = $request->input('bidang');
+
+        // Ambil data yang difilter berdasarkan bidang
+        $pendaftar = Pendaftar::query();
+
+        if ($bidang) {
+            // Filter berdasarkan bidang jika ada
+            $pendaftar->where('bidang', $bidang);
+        }
+
+        $pendaftar = $pendaftar->get();
+
+        // Kirim data ke view
+        return view('pembina.pendaftarmagang', compact('pendaftar'));
+    }
+
+        public function infoPendaftar($nim_nisn)
+    {
+        $pendaftar = Pendaftar::where('nim_nisn', $nim_nisn)->first();
+        $user = $pendaftar->users;
+        $pembina = $pendaftar->pembina;
+
+        return view('pembina.infopendaftar', compact('pendaftar', 'user', 'pembina'));
     }
 
     public function store(Request $request)
