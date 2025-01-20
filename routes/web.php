@@ -28,6 +28,8 @@ Route::middleware(['auth', 'Pembina'])->group(function () {
     Route::get('/pembina/pesertamagang', [PesertaController::class, 'daftarPeserta'])->name('pesertamagang');
     Route::get('/pembina/infopendaftar/{nim_nisn}', [PendaftaranController::class, 'infoPendaftar'])->name('infopendaftar');
     Route::get('/pembina/filterBidang', [PendaftaranController::class, 'filterBidang'])->name('filter.bidang');
+    Route::post('/pembina/setujui-pendaftaran/{nim_nisn}', [PendaftaranController::class, 'setujuiPendaftaran'])->name('setujui.pendaftaran');
+    Route::post('/pembina/tolak-pendaftaran/{nim_nisn}', [PendaftaranController::class, 'tolakPendaftaran'])->name('tolak.pendaftaran');
 });
 
 Route::get('/pembina/infopendaftar', function () {

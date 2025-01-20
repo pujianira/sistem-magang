@@ -55,6 +55,37 @@ class PendaftaranController extends Controller
         return view('pembina.infopendaftar', compact('pendaftar', 'user', 'pembina'));
     }
 
+    public function setujuiPendaftaran($nim_nisn)
+    {
+        $pendaftar = Pendaftar::where('nim_nisn', $nim_nisn)->first();
+        
+        if ($pendaftar && $pendaftar->status_pendaftaran == 'Pending') {
+            $pendaftar->update([
+                'status_pendaftaran' => 'Disetujui',
+                // 'tanggal_verifikasi' => now()
+            ]);
+            
+            return redirect()->back()->with('success', 'Pendaftaran berhasil disetujui');
+        }
+        
+        return redirect()->back()->with('error', 'Pendaftar tidak ditemukan atau sudah diproses');
+    }
+
+    public function tolakPendaftaran($nim_nisn)
+    {
+        $pendaftar = Pendaftar::where('nim_nisn', $nim_nisn)->first();
+        
+        if ($pendaftar && $pendaftar->status_pendaftaran == 'Pending') {
+            $pendaftar->update([
+                'status_pendaftaran' => 'Ditolak',
+                // 'tanggal_verifikasi' => now()
+            ]);
+            
+            return redirect()->back()->with('success', 'Pendaftaran telah ditolak');
+        }
+        
+        return redirect()->back()->with('error', 'Pendaftar tidak ditemukan atau sudah diproses');
+    }
     public function store(Request $request)
     {
         // Validasi input form

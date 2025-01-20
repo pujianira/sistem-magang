@@ -132,16 +132,91 @@
                         </div>
                     </div>
                     <div class="flex mt-10 justify-end">
-                        <button class="bg-green-500 text-white py-2 px-6 rounded-full mr-4">
+                    @if ($pendaftar->status_pendaftaran == 'Pending')
+                        <button class="bg-green-500 text-white py-2 px-6 rounded-full mr-4" 
+                                onclick="showConfirmationModal('approve')" 
+                                id="approveButton">
                             Setujui Pengajuan
                         </button>
-                        <button class="bg-red-500 text-white py-2 px-6 rounded-full">
+                        <button class="bg-red-500 text-white py-2 px-6 rounded-full" 
+                                onclick="showConfirmationModal('reject')" 
+                                id="rejectButton">
                             Tolak Pengajuan
                         </button>
+                    @else
+                        <button class="bg-green-500 text-white py-2 px-6 rounded-full mr-4 opacity-50">
+                            Setujui Pengajuan
+                        </button>
+                        <button class="bg-red-500 text-white py-2 px-6 rounded-full opacity-50">
+                            Tolak Pengajuan
+                        </button>
+                    @endif
+                </div>
+
+                <!-- Modal Confirmation -->
+                <div id="confirmationModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
+                    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                        <div class="mt-3 text-center">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modalTitle"></h3>
+                            <div class="mt-2 px-7 py-3">
+                                <p class="text-sm text-gray-500" id="modalMessage"></p>
+                            </div>
+                            <div class="items-center px-4 py-3">
+                                <form id="approvalForm" method="POST">
+                                    @csrf
+                                    <button id="confirmButton" 
+                                            class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+                                        Konfirmasi
+                                    </button>
+                                    <button type="button" 
+                                            onclick="hideConfirmationModal()" 
+                                            class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                                        Batal
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <script>
+                function showConfirmationModal(action) {
+                    const modal = document.getElementById('confirmationModal');
+                    const modalTitle = document.getElementById('modalTitle');
+                    const modalMessage = document.getElementById('modalMessage');
+                    const form = document.getElementById('approvalForm');
+                    const confirmButton = document.getElementById('confirmButton');
+                    
+                    if (action === 'approve') {
+                        modalTitle.textContent = 'Konfirmasi Persetujuan';
+                        modalMessage.textContent = 'Apakah Anda yakin ingin menyetujui pengajuan magang ini?';
+                        form.action = "{{ route('setujui.pendaftaran', $pendaftar->nim_nisn) }}";
+                        confirmButton.className = 'px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300';
+                    } else if (action === 'reject') {
+                        modalTitle.textContent = 'Konfirmasi Penolakan';
+                        modalMessage.textContent = 'Apakah Anda yakin ingin menolak pengajuan magang ini?';
+                        form.action = "{{ route('tolak.pendaftaran', $pendaftar->nim_nisn) }}";
+                        confirmButton.className = 'px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300';
+                    }
+                    
+                    modal.classList.remove('hidden');
+                }
+
+                function hideConfirmationModal() {
+                    const modal = document.getElementById('confirmationModal');
+                    modal.classList.add('hidden');
+                }
+
+                // Close modal when clicking outside
+                window.onclick = function(event) {
+                    const modal = document.getElementById('confirmationModal');
+                    if (event.target == modal) {
+                        hideConfirmationModal();
+                    }
+                }
+                </script>
                 </div>
             </div>
         </div>
     </div>
 </body>
-</html>
