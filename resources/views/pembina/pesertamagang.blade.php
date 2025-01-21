@@ -58,37 +58,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd:bg-gray-100 even:bg-gray-200">
-                                        <td class="py-2 px-3 text-sm border text-center">1</td>
-                                        <td class="py-2 px-3 text-sm border">Ahmad Fauzan</td>
-                                        <td class="py-2 px-3 text-sm border">24060122130080</td>
-                                        <td class="py-2 px-3 text-sm border">Universitas Diponegoro</td>
-                                        <td class="py-2 px-3 text-sm border">Teknik Informatika</td>
-                                        <td class="py-2 px-3 text-sm border">Teknologi Informasi</td>
-                                        <td class="py-2 px-3 text-sm border">2025-01-10</td>
-                                        
-                                        <td class="py-2 px-3 text-sm border text-center"><i class="fas fa-eye text-blue-600 cursor-pointer"></i></td>
-                                    </tr>
-                                    <tr class="odd:bg-gray-100 even:bg-gray-200">
-                                        <td class="py-2 px-3 text-sm border text-center">2</td>
-                                        <td class="py-2 px-3 text-sm border">Siti Aisyah</td>
-                                        <td class="py-2 px-3 text-sm border">210123457</td>
-                                        <td class="py-2 px-3 text-sm border">Universitas Gadjah Mada</td>
-                                        <td class="py-2 px-3 text-sm border">Manajemen</td>
-                                        <td class="py-2 px-3 text-sm border">Keuangan</td>
-                                        <td class="py-2 px-3 text-sm border">2025-01-09</td>
-                                        <td class="py-2 px-3 text-sm border text-center"><i class="fas fa-eye text-blue-600 cursor-pointer"></i></td>
-                                    </tr>
-                                    <tr class="odd:bg-gray-100 even:bg-gray-200">
-                                        <td class="py-2 px-3 text-sm border text-center">3</td>
-                                        <td class="py-2 px-3 text-sm border">Budi Santoso</td>
-                                        <td class="py-2 px-3 text-sm border">210123458</td>
-                                        <td class="py-2 px-3 text-sm border">Institut Teknologi Bandung</td>
-                                        <td class="py-2 px-3 text-sm border">Desain Komunikasi Visual</td>
-                                        <td class="py-2 px-3 text-sm border">Pemasaran</td>
-                                        <td class="py-2 px-3 text-sm border">2025-01-08</td>
-                                        <td class="py-2 px-3 text-sm border text-center"><i class="fas fa-eye text-blue-600 cursor-pointer"></i></td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>

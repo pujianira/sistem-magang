@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Bidang;
 use App\Models\Pendaftar;
 use App\Models\Periode;
+use Illuminate\Support\Facades\Log;
 
 class PendaftaranController extends Controller
 {
@@ -55,37 +56,60 @@ class PendaftaranController extends Controller
         return view('pembina.infopendaftar', compact('pendaftar', 'user', 'pembina'));
     }
 
-    public function setujuiPendaftaran($nim_nisn)
+    public function terimaPendaftaran($nim_nisn)
     {
         $pendaftar = Pendaftar::where('nim_nisn', $nim_nisn)->first();
         
-        if ($pendaftar && $pendaftar->status_pendaftaran == 'Pending') {
-            $pendaftar->update([
-                'status_pendaftaran' => 'Disetujui',
-                // 'tanggal_verifikasi' => now()
-            ]);
-            
-            return redirect()->back()->with('success', 'Pendaftaran berhasil disetujui');
+        if (!$pendaftar) {
+            return redirect()->back()->with('error', 'Pendaftar tidak ditemukan');
         }
-        
-        return redirect()->back()->with('error', 'Pendaftar tidak ditemukan atau sudah diproses');
+
+        try {
+            $pendaftar->status_pendaftaran = 'Diterima';
+            $pendaftar->save();
+            
+            return redirect()->back()->with('success', 'Pendaftaran berhasil diterima');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat memproses pendaftaran');
+        }
     }
 
-    public function tolakPendaftaran($nim_nisn)
+    public function tolakPendaftaran($nim_nisn) 
     {
         $pendaftar = Pendaftar::where('nim_nisn', $nim_nisn)->first();
         
-        if ($pendaftar && $pendaftar->status_pendaftaran == 'Pending') {
-            $pendaftar->update([
-                'status_pendaftaran' => 'Ditolak',
-                // 'tanggal_verifikasi' => now()
-            ]);
+        if (!$pendaftar) {
+            return redirect()->back()->with('error', 'Pendaftar tidak ditemukan');
+        }
+
+        try {
+            $pendaftar->status_pendaftaran = 'Ditolak';
+            $pendaftar->save();
             
             return redirect()->back()->with('success', 'Pendaftaran telah ditolak');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat memproses pendaftaran');
         }
-        
-        return redirect()->back()->with('error', 'Pendaftar tidak ditemukan atau sudah diproses');
     }
+
+    public function resetStatus($nim_nisn)
+    {
+        $pendaftar = Pendaftar::where('nim_nisn', $nim_nisn)->first();
+        
+        if (!$pendaftar) {
+            return redirect()->back()->with('error', 'Pendaftar tidak ditemukan');
+        }
+
+        try {
+            $pendaftar->status_pendaftaran = 'Pending';
+            $pendaftar->save();
+            
+            return redirect()->back()->with('success', 'Status berhasil direset');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mereset status');
+        }
+    }
+
     public function store(Request $request)
     {
         // Validasi input form

@@ -26,7 +26,7 @@
                     <form action="/pembina/filterBidang" method="GET" class="mb-6">
                         <div class="mb-4 flex items-center">
                             <label for="bidang" class="mr-2 w-24 font-bold">Bidang:</label>
-                            <select name="bidang" id="bidang" class="p-2 rounded bg-gray-200 text-gray-700 w-60">
+                            <select name="bidang" id="bidang" class="p-2 rounded bg-gray-200 text-gray-700 w-80">
                                 <option value="">--- Pilih Bidang ---</option>
                                 @foreach($bidangs as $bidang)
                                     <option value="{{ $bidang->id_bidang }}" {{ request('bidang') == $bidang->id_bidang ? 'selected' : '' }}>
@@ -71,7 +71,7 @@
                                             <td class="py-2 px-3 text-sm border">{{ $pendaftar->nama_bidang }}</td>
                                             <td class="py-2 px-3 text-sm border text-center">
                                                 @switch($pendaftar->status_pendaftaran)
-                                                    @case('disetujui')
+                                                    @case('diterima')
                                                         <span class="bg-green-100 text-green-800 px-2 py-1 rounded">
                                                             Diterima
                                                         </span>
