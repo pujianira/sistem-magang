@@ -1,112 +1,3 @@
-{{-- <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout> --}}
-
-{{-- <x-guest-layout>
-    <div class="flex justify-between items-center bg-blue-900 p-4">
-        <div>
-            <h1 class="text-white text-2xl">MAGANG DISKOMINFO SEMARANG</h1>
-            <img src="{{ asset('path/to/logo.png') }}" alt="Logo" class="h-16">
-        </div>
-        <div class="text-white">
-            <nav>
-                <a href="#" class="mr-4">Home</a>
-                <a href="#" class="mr-4">Profil</a>
-                <a href="#" class="mr-4">Info Bidang</a>
-                <a href="#" class="mr-4">Kontak</a>
-                <a href="#" class="bg-orange-500 text-white px-4 py-2 rounded">Daftar</a>
-            </nav>
-        </div>
-    </div>
-
-    <div class="flex justify-center items-center h-screen">
-        <form method="POST" action="{{ route('login') }}" class="bg-white p-6 rounded shadow-md w-1/3">
-            @csrf
-            <h2 class="text-center text-2xl mb-4">Masuk</h2>
-
-            <div>
-                <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-            </div>
-
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
-                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" name="remember" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-between mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-primary-button class="bg-orange-500 text-white">
-                    {{ __('Masuk') }}
-                </x-primary-button>
-            </div>
-
-            <div class="mt-4 text-center">
-                <span>Belum mempunyai akun?</span>
-                <a href="{{ route('register') }}" class="text-orange-500">Daftar</a>
-            </div>
-        </form>
-    </div>
-</x-guest-layout> --}}
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -120,7 +11,8 @@
     <!-- Header -->
     <header class="bg-dark-blue text-white">
         <div class="container mx-auto flex items-center justify-between py-4">
-            <h1 class="text-xl font-bold ml-6">MAGANG DISKOMINFO SEMARANG</h1>
+            {{-- <h1 class="text-xl font-bold ml-6">MAGANG DISKOMINFO SEMARANG</h1> --}}
+            <h1 class="text-xl font-bold ml-6">DinfoMagang</h1>
             <nav>
                 <ul class="flex space-x-28 transform -translate-x-6">
                     <li><a href="#" class="hover:underline">Home</a></li>
@@ -133,18 +25,15 @@
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Konten -->
     <div class="container mx-auto flex items-center justify-between py-30">
-        <!-- Logo Section -->
         <div class="w-1/2 flex justify-center">
-            <img src="{{ asset('img/logodiskominfo.png') }}" alt="Logo Diskominfo" style="width: 400px; height: auto;" class="h-48">
+            {{-- <img src="{{ asset('img/logodiskominfo.png') }}" alt="Logo Diskominfo" style="width: 400px; height: auto;" class="h-48"> --}}
         </div>
         
-        <!-- Login Form Section -->
         <div class="w-1/2 bg-dark-blue text-white p-40 shadow-lg" style="margin-left: -5px; width: 60%">
             <h1 class="text-3xl font-bold text-center mb-8">Masuk</h1>
 
-            <!-- Session Status -->
             @if(session('status'))
                 <div class="mb-4 text-sm text-green-600">
                     {{ session('status') }}
@@ -154,7 +43,7 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                <!-- Email Address -->
+                <!-- Email -->
                 <div>
                     <label for="email" class="block text-sm font-medium">Email</label>
                     <input id="email" class="block w-full border rounded-md px-4 py-2 mt-1 text-gray-900" type="email" name="email" value="{{ old('email') }}" required autofocus>
@@ -180,14 +69,7 @@
                     @enderror
                 </div>
 
-                <!-- Remember Me -->
-                {{-- <div class="flex items-center mt-4">
-                    <label for="remember_me" class="inline-flex items-center">
-                        <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-blue-600 shadow-sm focus:ring focus:ring-blue-500" name="remember">
-                        <span class="ml-2 text-sm">Ingat saya</span>
-                    </label>
-                </div> --}}
-
+                <!-- Ingat Saya -->
                 <div class="flex items-center justify-between mt-6">
                     <label for="remember_me" class="inline-flex items-center">
                         <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-blue-600 shadow-sm focus:ring focus:ring-blue-500" name="remember">
@@ -209,6 +91,7 @@
             </div>
         </div>
     </div>
+
     <script>
         function togglePasswordVisibility() {
             const passwordField = document.getElementById('password');
