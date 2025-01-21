@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Bidang;
 use App\Models\Pendaftar;
 use App\Models\Periode;
+use Illuminate\Support\Facades\Log;
 
 class PendaftaranController extends Controller
 {
@@ -13,7 +14,10 @@ class PendaftaranController extends Controller
     {
         $user = auth()->user(); 
         $bidangs = Bidang::all();
-        return view('pembina.pendaftarmagang', compact('user', 'bidangs'));
+        $pendaftarData = Pendaftar::select('nim_nisn', 'nama', 'universitas_sekolah', 'jurusan', 'nama_bidang', 'status_pendaftaran', 'status_kelulusan')->get();
+        $totalPendaftar = Pendaftar::count();
+
+        return view('pembina.pendaftarmagang', compact('user', 'bidangs', 'pendaftarData', 'totalPendaftar'));
     }
 
     public function daftarMagang() 
@@ -22,6 +26,88 @@ class PendaftaranController extends Controller
         $bidangs = Bidang::all();
         $periodes = Periode::all();
         return view('pendaftar.daftarmagang', compact('user', 'bidangs', 'periodes'));
+    }
+
+    public function filterBidang(Request $request)
+    {
+        $bidangs = Bidang::all(); 
+        $user = auth()->user(); 
+        
+        $bidang = $request->input('bidang');
+        
+        $pendaftarData = Pendaftar::query();
+        
+        if ($bidang) {
+            $pendaftarData = $pendaftarData->where('id_bidang', $bidang);
+        }
+        
+        $pendaftarData = $pendaftarData->get();
+        $totalPendaftar = $pendaftarData->count();
+        
+        return view('pembina.pendaftarmagang', compact('pendaftarData', 'bidangs', 'user', 'totalPendaftar'));
+    }
+
+        public function infoPendaftar($nim_nisn)
+    {
+        $pendaftar = Pendaftar::where('nim_nisn', $nim_nisn)->first();
+        $user = $pendaftar->users;
+        $pembina = $pendaftar->pembina;
+
+        return view('pembina.infopendaftar', compact('pendaftar', 'user', 'pembina'));
+    }
+
+    public function terimaPendaftaran($nim_nisn)
+    {
+        $pendaftar = Pendaftar::where('nim_nisn', $nim_nisn)->first();
+        
+        if (!$pendaftar) {
+            return redirect()->back()->with('error', 'Pendaftar tidak ditemukan');
+        }
+
+        try {
+            $pendaftar->status_pendaftaran = 'Diterima';
+            $pendaftar->save();
+            
+            return redirect()->back()->with('success', 'Pendaftaran berhasil diterima');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat memproses pendaftaran');
+        }
+    }
+
+    public function tolakPendaftaran($nim_nisn) 
+    {
+        $pendaftar = Pendaftar::where('nim_nisn', $nim_nisn)->first();
+        
+        if (!$pendaftar) {
+            return redirect()->back()->with('error', 'Pendaftar tidak ditemukan');
+        }
+
+        try {
+            $pendaftar->status_pendaftaran = 'Ditolak';
+            $pendaftar->save();
+            
+            return redirect()->back()->with('success', 'Pendaftaran telah ditolak');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat memproses pendaftaran');
+        }
+    }
+
+    public function resetStatus($nim_nisn)
+    {
+        $pendaftar = Pendaftar::where('nim_nisn', $nim_nisn)->first();
+        
+        if (!$pendaftar) {
+            return redirect()->back()->with('error', 'Pendaftar tidak ditemukan');
+        }
+
+        try {
+            $pendaftar->status_pendaftaran = 'Pending';
+            $pendaftar->save();
+            
+            return redirect()->back()->with('success', 'Status berhasil direset');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mereset status');
+        }
     }
 
     public function store(Request $request)

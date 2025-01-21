@@ -6,21 +6,32 @@
     <title>Masuk - Diskominfo Kota Semarang</title>
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"> --}}
     @vite('resources/css/app.css')
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
 <body class="bg-white min-h-screen">
     <!-- Header -->
     <header class="bg-dark-blue text-white">
         <div class="container mx-auto flex items-center justify-between py-4">
-            {{-- <h1 class="text-xl font-bold ml-6">MAGANG DISKOMINFO SEMARANG</h1> --}}
-            <h1 class="text-xl font-bold ml-6">DinfoMagang</h1>
+            <h1 class="text-xl font-bold ml-6">MAGANG DISKOMINFO SEMARANG</h1>
             <nav>
-                <ul class="flex space-x-28 transform -translate-x-6">
-                    <li><a href="#" class="hover:underline">Home</a></li>
-                    <li><a href="#" class="hover:underline">Profil</a></li>
-                    <li><a href="#" class="hover:underline">Info Bidang</a></li>
-                    <li><a href="#" class="hover:underline">Kontak</a></li>
-                    <li><a href="{{ route('register') }}" class="bg-orange-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600">Daftar</a></li>
-                </ul>
+            <ul class="flex space-x-28 transform -translate-x-6">
+                <li><a href="#" class="font-bold hover:text-orange-300">Home</a></li>
+                <li><a href="#" class="font-bold hover:text-orange-300">Profil</a></li>
+                <li><a href="#" class="font-bold hover:text-orange-300">Info Bidang</a></li>
+                <li><a href="#" class="font-bold hover:text-orange-300">Kontak</a></li>
+                <li>
+                    <a href="{{ route('register') }}" 
+                    class="bg-orange-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600">
+                    Daftar
+                    </a>
+                </li>
+            </ul>
             </nav> 
         </div>
     </header>
@@ -28,7 +39,7 @@
     <!-- Konten -->
     <div class="container mx-auto flex items-center justify-between py-30">
         <div class="w-1/2 flex justify-center">
-            {{-- <img src="{{ asset('img/logodiskominfo.png') }}" alt="Logo Diskominfo" style="width: 400px; height: auto;" class="h-48"> --}}
+            <img src="{{ asset('img/logodiskominfo.png') }}" alt="Logo Diskominfo" style="width: 400px; height: auto;" class="h-48">
         </div>
         
         <div class="w-1/2 bg-dark-blue text-white p-40 shadow-lg" style="margin-left: -5px; width: 60%">

@@ -99,8 +99,8 @@
         <div class="profile-section">
             <div class="profile-image"></div>
             <div class="profile-info">
-                <p class="mb-1">{{ $user->nama ?? 'Nama Tidak Ditemukan' }}</p>
-                <p>NIP. {{ $user->pembina?->nip ?? 'NIP Tidak Ditemukan' }}</p>
+                <p class="mb-1">{{ Auth::user()->nama ?? 'Nama Tidak Ditemukan' }}</p>
+                <p>NIP. {{ Auth::user()->pembina?->nip ?? 'NIP Tidak Ditemukan' }}</p>
             </div>
         </div>
 
@@ -140,7 +140,14 @@
 
     <script>
     const menuItems = document.querySelectorAll('.menu-item');
-
+    
+    function isPathMatch(currentPath, menuPath) {
+        // Untuk path /pembina/infopendaftar/{nim_nisn}
+        if (currentPath.startsWith('/pembina/infopendaftar/')) {
+            return menuPath === '/pembina/pendaftarmagang';
+        }
+        return currentPath === menuPath;
+    }
     // Fungsi untuk mendapatkan path saat ini
     function getCurrentPath() {
         return window.location.pathname;
@@ -148,28 +155,32 @@
 
     // Fungsi untuk mengatur menu aktif berdasarkan path
     function setActiveMenu() {
+        const menuItems = document.querySelectorAll('.menu-item');
         // Hapus semua class active terlebih dahulu
         menuItems.forEach(item => item.classList.remove('active'));
         
         const currentPath = getCurrentPath();
+        
         // Cari dan aktifkan menu yang sesuai dengan path saat ini
         menuItems.forEach(item => {
             const href = item.getAttribute('href');
-            if (currentPath === href) {
+            if (isPathMatch(currentPath, href)) {
                 item.classList.add('active');
             }
         });
     }
 
     // Event listener untuk klik menu
-    menuItems.forEach(item => {
+    document.querySelectorAll('.menu-item').forEach(item => {
         item.addEventListener('click', function() {
-            menuItems.forEach(i => i.classList.remove('active'));
+            document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
             item.classList.add('active');
         });
     });
 
-    setActiveMenu();
+    document.addEventListener('DOMContentLoaded', setActiveMenu);
+
+    
     </script>
 </body>
 </html>

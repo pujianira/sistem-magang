@@ -20,7 +20,7 @@
 <body class="bg-gray-100 text-gray-800">
     <div class="flex h-screen">
         <!-- Sidebar -->
-        @include('layouts.sidebar-pendaftar')
+        @include('layouts.sidebard')
         <!-- Main Content -->
         <div class="flex-1 p-6 overflow-y-auto">
             <div class="relative mb-6">
