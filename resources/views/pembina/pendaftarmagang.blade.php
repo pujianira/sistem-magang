@@ -55,8 +55,21 @@
                                     <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Universitas / Sekolah</th>
                                     <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Jurusan</th>
                                     <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Bidang</th>
-                                    <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">Status</th>
-                                    
+                                    <th class="py-2 px-3 text-sm whitespace-nowrap border w-1/6">
+                                        <a href="{{ route('pendaftarmagang', ['direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}" 
+                                        class="flex justify-center items-center text-center  hover:text-gray-300 transition duration-200 ease-in-out">
+                                            Status 
+                                            <span class="ml-2">
+                                                @if(request('direction') === 'asc')
+                                                    <i class="fas fa-sort-up text-gray-600"></i>
+                                                @elseif(request('direction') === 'desc')
+                                                    <i class="fas fa-sort-down text-gray-600"></i>
+                                                @else
+                                                    <i class="fas fa-sort text-gray-400"></i>
+                                                @endif
+                                            </span>
+                                        </a>
+                                    </th>
                                     <th class="py-2 px-3 text-sm whitespace-nowrap border w-12"><i class="fas fa-search"></i></th>
                                 </tr>
                                 </thead>
@@ -64,26 +77,26 @@
                                     @foreach($pendaftarData as $index => $pendaftar)
                                         <tr class="odd:bg-gray-100 even:bg-gray-200">
                                             <td class="py-2 px-3 text-sm border text-center">{{ $index + 1 }}</td>
-                                            <td class="py-2 px-3 text-sm border">{{ $pendaftar->nama }}</td>
+                                            <td class="py-2 px-3 text-sm border">{{ $pendaftar->user->nama }}</td>
                                             <td class="py-2 px-3 text-sm border">{{ $pendaftar->nim_nisn }}</td>
                                             <td class="py-2 px-3 text-sm border">{{ $pendaftar->universitas_sekolah }}</td>
                                             <td class="py-2 px-3 text-sm border">{{ $pendaftar->jurusan }}</td>
                                             <td class="py-2 px-3 text-sm border">{{ $pendaftar->nama_bidang }}</td>
                                             <td class="py-2 px-3 text-sm border text-center">
                                                 @switch($pendaftar->status_pendaftaran)
-                                                    @case('diterima')
+                                                    @case('Diterima')
                                                         <span class="bg-green-100 text-green-800 px-2 py-1 rounded">
                                                             Diterima
                                                         </span>
                                                         @break
 
-                                                    @case('pending')
+                                                    @case('Menunggu')
                                                         <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
                                                             Menunggu
                                                         </span>
                                                         @break
 
-                                                    @case('ditolak')
+                                                    @case('Ditolak')
                                                         <span class="bg-red-100 text-red-800 px-2 py-1 rounded">
                                                             Ditolak
                                                         </span>

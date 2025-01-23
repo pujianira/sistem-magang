@@ -93,7 +93,7 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-header">
-            <h1 class="text-xl font-bold">MAGANG DISKOMINFO</h1>
+            <h1 class="text-xl font-bold">Dinfo Magang</h1>
         </div>
         
         <div class="profile-section">
@@ -145,7 +145,10 @@
         // Untuk path /pembina/infopendaftar/{nim_nisn}
         if (currentPath.startsWith('/pembina/infopendaftar/')) {
             return menuPath === '/pembina/pendaftarmagang';
-        }
+        } 
+        else if (currentPath.startsWith('/pembina/infopeserta/')) {
+            return menuPath === '/pembina/pesertamagang';
+        } 
         return currentPath === menuPath;
     }
     // Fungsi untuk mendapatkan path saat ini

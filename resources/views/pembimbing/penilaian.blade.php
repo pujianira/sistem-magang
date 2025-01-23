@@ -53,7 +53,7 @@
 </head>
 <body class="bg-gray-100">
     <div class="flex min-h-screen">
-        @include('layouts.sidebard')
+        @include('layouts.sidebarm')
         <div class="flex-1 p-6 overflow-y-auto">
             <h1 class="text-2xl font-bold mb-8">Penilaian</h1>
 
