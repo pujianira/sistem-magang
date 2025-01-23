@@ -15,7 +15,8 @@ return new class extends Migration
             $table->char('nim_nisn', 14)->primary();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->char('nik', 16);
-            $table->date('ttl')->nullable();
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->string('jenis_kelamin', 10)->nullable();
             $table->string('agama', 30)->nullable();
             $table->string('universitas_sekolah', 50);
