@@ -93,7 +93,7 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-header">
-            <h1 class="text-xl font-bold">MAGANG DISKOMINFO</h1>
+            {{-- <h1 class="text-xl font-bold">MAGANG DISKOMINFO</h1> --}}
         </div>
         
         <div class="profile-section">

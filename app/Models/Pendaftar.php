@@ -12,7 +12,7 @@ class Pendaftar extends Model
     public $incrementing = false; // Since nim_nisn is not auto-incrementing
     protected $keyType = 'string';
 
-    protected $fillable = ['nim_nisn', 'user_id', 'nik', 'ttl', 'jenis_kelamin', 'agama', 'universitas_sekolah', 'jurusan', 'surat_permohonan', 'proposal', 'curriculum_vitae', 'laporan', 'bulan_mulai', 'tahun_mulai', 'id_bidang', 'nama_bidang', 'status_pendaftaran', 'status_kelulusan', 'nip_pembina', 'nip_pembimbing'];
+    protected $fillable = ['nim_nisn', 'user_id', 'nik', 'ttl', 'jenis_kelamin', 'agama', 'universitas_sekolah', 'jurusan', 'surat_permohonan', 'proposal', 'curriculum_vitae', 'laporan', 'bulan_mulai', 'tahun_mulai', 'id_bidang', 'nama_bidang', 'tanggal_pendaftaran', 'status_pendaftaran', 'status_kelulusan', 'nip_pembina', 'nip_pembimbing'];
     
     public function user()
     {
