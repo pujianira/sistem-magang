@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('nama_bidang', 50)->nullable();;
             $table->string('bulan_mulai')->nullable();
             $table->integer('tahun_mulai')->nullable();
+            $table->integer('durasi')->nullable();
             $table->timestamp('tanggal_pendaftaran')->nullable();
             $table->enum('status_pendaftaran', ['Belum Mendaftar', 'Menunggu', 'Diterima', 'Ditolak']);
             $table->enum('status_kelulusan', ['Belum Mendaftar', 'Aktif', 'Lulus', 'Tidak Lulus']);
