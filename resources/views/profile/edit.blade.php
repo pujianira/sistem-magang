@@ -53,15 +53,14 @@
                                 </label>
                                 <div class="mt-1 ml-4 block w-full">{{ $user->nama }}</div>
                             </div>
+                            <!-- Jenis Kelamin -->
+                            <div class="flex items-center">
+                                <label class="w-60 text-sm font-medium text-gray-700">Jenis Kelamin</label>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->nama }}</div>
+                            </div>
+
                         @endif
                         
-
-                        <!-- Jenis Kelamin -->
-                        <div class="flex items-center">
-                            <label class="w-60 text-sm font-medium text-gray-700">Jenis Kelamin</label>
-                            <div class="mt-1 ml-4 block w-full">{{ $user->nama }}</div>
-                        </div>
-
                         <!-- Peran -->
                         <div class="flex items-center">
                             <label class="w-60 text-sm font-medium text-gray-700">Peran</label>
