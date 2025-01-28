@@ -51,12 +51,12 @@
                                 <label class="w-60 text-sm font-medium text-gray-700">
                                     NIK
                                 </label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama }}</div>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->nama ?? 'NIK belum tersedia' }}</div>
                             </div>
                             <!-- Jenis Kelamin -->
                             <div class="flex items-center">
                                 <label class="w-60 text-sm font-medium text-gray-700">Jenis Kelamin</label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama }}</div>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->nama ?? 'Jenis Kelamin belum tersedia'}}</div>
                             </div>
 
                         @endif
@@ -72,22 +72,22 @@
                             <!-- Agama -->
                             <div class="flex items-center">
                                 <label class="w-60 text-sm font-medium text-gray-700">Agama</label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama }}</div>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->nama ?? 'Agama belum tersedia' }}</div>
                             </div>
                             <!-- Tempat, Tanggal Lahir -->
                             <div class="flex items-center">
                                 <label class="w-60 text-sm font-medium text-gray-700">Tempat, Tanggal Lahir</label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama }}</div>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->nama ?? 'Tempat, Tanggal Lahir belum tersedia' }}</div>
                             </div>
                             <!-- Universitas/Sekolah -->
                             <div class="flex items-center">
                                 <label class="w-60 text-sm font-medium text-gray-700">Universitas/Sekolah</label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama }}</div>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->nama ?? 'Universitas/Sekolah belum tersedia' }}</div>
                             </div>
                             <!-- Jurusan -->
                             <div class="flex items-center">
                                 <label class="w-60 text-sm font-medium text-gray-700">Jurusan</label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama }}</div>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->nama ?? 'Jurusan belum tersedia' }}</div>
                             </div>
                         @endif
                         
@@ -111,10 +111,10 @@
                             <label class="w-60 text-sm font-medium text-gray-700">Email</label>
                             <div class="mt-1 ml-4 block w-full">{{ $user->email }}</div>
                         </div>
-                        <!-- No Handphone -->
+                        <!-- No Telepon -->
                         <div class="flex items-center">
-                            <label class="w-60 text-sm font-medium text-gray-700">No Handphone</label>
-                            <div class="mt-1 ml-4 block w-full">{{ $user->no_hp }}</div>
+                            <label class="w-60 text-sm font-medium text-gray-700">No Telepon</label>
+                            <div class="mt-1 ml-4 block w-full">{{ $user->no_hp ?? 'No Telepon belum tersedia' }}</div>
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                         <!-- Alamat -->
                         <div class="flex items-center">
                             <label class="w-60 text-sm font-medium text-gray-700">Alamat Rumah</label>
-                            <div class="mt-1 ml-4 block w-full">{{ $user->email }}</div>
+                            <div class="mt-1 ml-4 block w-full">{{ $user->email ?? 'Alamat belum tersedia' }}</div>
                         </div>
                     </div>
                 </div>
