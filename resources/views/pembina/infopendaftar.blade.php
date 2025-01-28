@@ -43,7 +43,7 @@
                        <div class="p-3 rounded-md mb-1">
                            <div class="flex items-center">
                                <h4 class="text-base font-medium text-gray-500 w-1/3">Nama</h4>
-                               <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->nama }}</p>
+                               <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->user->nama }}</p>
                            </div>
                        </div>
                        <div class="p-3 rounded-md mb-1">
@@ -169,14 +169,14 @@
                     </div> -->
                     <div class="flex mt-10 justify-end">
                         <button onclick="konfirmasiSetuju('{{ route('terima.pendaftaran', $pendaftar->nim_nisn) }}')" 
-                                class="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-full mr-4 @if($pendaftar->status_pendaftaran != 'Pending') opacity-50 cursor-not-allowed @endif"
-                                @if($pendaftar->status_pendaftaran != 'Pending') disabled @endif>
+                                class="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-full mr-4 @if($pendaftar->status_pendaftaran != 'Menunggu') opacity-50 cursor-not-allowed @endif"
+                                @if($pendaftar->status_pendaftaran != 'Menunggu') disabled @endif>
                             Terima Pengajuan
                         </button>
                         
                         <button onclick="konfirmasiTolak('{{ route('tolak.pendaftaran', $pendaftar->nim_nisn) }}')" 
-                                class="bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-full @if($pendaftar->status_pendaftaran != 'Pending') opacity-50 cursor-not-allowed @endif"
-                                @if($pendaftar->status_pendaftaran != 'Pending') disabled @endif>
+                                class="bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-full @if($pendaftar->status_pendaftaran != 'Menunggu') opacity-50 cursor-not-allowed @endif"
+                                @if($pendaftar->status_pendaftaran != 'Menunggu') disabled @endif>
                             Tolak Pengajuan
                         </button>
                     </div>

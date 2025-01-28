@@ -10,15 +10,22 @@ use Illuminate\Support\Facades\Log;
 
 class PendaftaranController extends Controller
 {
-    public function pendaftar()
-    {
-        $user = auth()->user(); 
-        $bidangs = Bidang::all();
-        $pendaftarData = Pendaftar::select('nim_nisn', 'nama', 'universitas_sekolah', 'jurusan', 'nama_bidang', 'status_pendaftaran', 'status_kelulusan')->get();
-        $totalPendaftar = Pendaftar::count();
+    public function pendaftar(Request $request)
+{
+    $user = auth()->user(); 
+    $bidangs = Bidang::all();
+    
+    $pendaftarData = Pendaftar::with('user:id,nama') 
+        ->select('nim_nisn', 'universitas_sekolah', 'jurusan', 'nama_bidang', 'status_pendaftaran', 'status_kelulusan', 'user_id')
+        ->whereHas('user')  
+        ->where('status_pendaftaran', '!=', 'Belum Mendaftar') 
+        ->orderBy('status_pendaftaran', $request->input('direction', 'asc'))
+        ->get();
+    
+    $totalPendaftar = $pendaftarData->count();
 
-        return view('pembina.pendaftarmagang', compact('user', 'bidangs', 'pendaftarData', 'totalPendaftar'));
-    }
+    return view('pembina.pendaftarmagang', compact('user', 'bidangs', 'pendaftarData', 'totalPendaftar'));
+}
 
     public function daftarMagang() 
     {

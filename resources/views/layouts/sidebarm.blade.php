@@ -120,7 +120,7 @@
                 <i class="fas fa-users"></i>
                 <span>Peserta Magang</span>
             </a>
-            <a href="#" class="menu-item" id="penilaianLink">
+            <a href="/pembimbing/penilaian" class="menu-item" id="penilaianLink">
                 <i class="fas fa-clipboard-list"></i>
                 <span>Penilaian</span>
             </a>

@@ -3,17 +3,18 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,14 +29,17 @@ Route::middleware(['auth', 'Pembina'])->group(function () {
     Route::get('/pembina/pesertamagang', [PesertaController::class, 'daftarPeserta'])->name('pesertamagang');
     Route::get('/pembina/infopendaftar/{nim_nisn}', [PendaftaranController::class, 'infoPendaftar'])->name('infopendaftar');
     Route::get('/pembina/filterBidang', [PendaftaranController::class, 'filterBidang'])->name('filter.bidang');
+    Route::get('/pembina/filterBidangPeserta', [PesertaController::class, 'filterBidangPeserta'])->name('filter.bidangpeserta');
     Route::post('/pembina/terima-pendaftaran/{nim_nisn}', [PendaftaranController::class, 'terimaPendaftaran'])->name('terima.pendaftaran');
     Route::post('/pembina/tolak-pendaftaran/{nim_nisn}', [PendaftaranController::class, 'tolakPendaftaran'])->name('tolak.pendaftaran');
+    Route::get('/pembina/infopeserta/{nim_nisn}', [PesertaController::class, 'infoPeserta'])->name('infopeserta');
 });
 
 //pembimbing
 Route::middleware(['auth', 'Pembimbing'])->group(function () {
     Route::get('/pembimbing/beranda', [HomeController::class, 'berandaPembimbing'])->name('beranda-Pembimbing'); 
     Route::get('/pembimbing/pesertamagang', [PesertaController::class, 'daftarMentee'])->name('pesertamagang');
+    Route::get('/pembimbing/penilaian', [PenilaianController::class, 'index'])->name('penilaian');
 });
 
 //pendaftar
@@ -46,8 +50,8 @@ Route::middleware(['auth', 'Pendaftar'])->group(function () {
     Route::get('/pendaftar/laporanmagang', [LaporanController::class, 'kirimLaporan'])->name('kirimLaporan'); 
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
