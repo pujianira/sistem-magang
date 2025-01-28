@@ -36,26 +36,6 @@
             margin-bottom: 2rem;
         }
 
-        .profile-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .profile-image {
-            width: 96px;
-            height: 96px;
-            background-color: #374151;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-        }
-
-        .profile-info {
-            text-align: center;
-            font-size: 0.875rem;
-        }
-
         .nav-menu {
             display: flex;
             flex-direction: column;
@@ -87,36 +67,72 @@
             width: 20px;
             margin-right: 0.75rem;
         }
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+            text-decoration: none;
+        }
+
+        .profile-image {
+            width: 96px;
+            height: 96px;
+            background-color: #ccc;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease; 
+        }
+
+        .profile-info {
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        .profile-section:hover .profile-image,
+        .profile-section.active .profile-image{
+            transform: scale(1.1); 
+        }
     </style>
 </head>
 <body>
     <div class="sidebar">
         <div class="sidebar-header">
-            <h1 class="text-xl font-bold">MAGANG DISKOMINFO</h1>
+            <h1 class="text-xl font-bold">DinfoMagang</h1>
         </div>
         
-        <div class="profile-section">
+        <a href="{{ route('profile.edit') }}" class="profile-section {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
             <div class="profile-image"></div>
             <div class="profile-info">
-                <p class="mb-1">{{ $user->nama ?? 'Nama Tidak Ditemukan' }}</p>
-                <p>NIS/NIM. {{ $user->pendaftar?->nim_nisn ?? 'NIM/NISN Tidak Ditemukan' }}</p>
+                <p class="mb-1">{{ $user->nama }}</p>
+                <p>NIS/NIM. {{ $user->pendaftar->nim_nisn }}</p>
             </div>
-        </div>
+        </a>
 
         <nav class="nav-menu">
-            <a href="/pendaftar/beranda" class="menu-item" id="dashboardLink">
+            <a href="{{ route('beranda-Pendaftar') }}" 
+                class="menu-item flex items-center p-2 rounded
+                {{ request()->routeIs('beranda-Pendaftar') ? 'active' : 'text-gray-700' }}">
                 <i class="fas fa-home"></i>
-                <span>Dashboard</span>
+                <span>Beranda</span>
             </a>
-            <a href="/pendaftar/daftarmagang" class="menu-item" id="pendaftarLink">
+
+            <a href="{{ route('daftarmagang') }}"
+                class="menu-item flex items-center p-2 rounded
+                {{ request()->routeIs('daftarmagang') ? 'active' : 'text-gray-700' }}">
                 <i class="fas fa-clipboard-list"></i>
                 <span>Daftar Magang</span>
             </a>
-            <a href="/pendaftar/laporanmagang" class="menu-item" id="pesertaLink">
+
+            <a href="{{ route('kirimLaporan') }}"
+                class="menu-item flex items-center p-2 rounded
+                {{ request()->routeIs('kirimLaporan') ? 'active' : 'text-gray-700' }}">
                 <i class="fas fa-file-alt"></i>
                 <span>Laporan</span>
             </a>
-            <a href="#" 
+
+            <a href="{{ route('login') }}" 
                 class="menu-item" 
                 id="logoutLink"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

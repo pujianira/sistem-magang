@@ -3,24 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function berandaPembina()
     {
-        $user = auth()->user(); 
-        return view('pembina.beranda-pembina', compact('user')); 
+        $user = Auth::user();
+        $namaPembina = $user->nama;
+        return view('pembina.beranda-pembina', compact('user', 'namaPembina')); 
     }
 
     public function berandaPembimbing()
     {
-        $user = auth()->user(); 
-        return view('pembimbing.beranda-pembimbing', compact('user')); 
+        $user = Auth::user();
+        $namaPembimbing = $user->nama;
+        return view('pembimbing.beranda-pembimbing', compact('user', 'namaPembimbing')); 
     }
 
     public function berandaPendaftar()
     {
-        $user = auth()->user(); 
-        return view('pendaftar.beranda-pendaftar', compact('user')); 
+        $user = Auth::user();
+        $namaPendaftar = $user->nama;
+        $statusPendaftaran = $user->pendaftar->status_pendaftaran;
+        $statusKelulusan = $user->pendaftar->status_kelulusan;
+        return view('pendaftar.beranda-pendaftar', compact('user', 'namaPendaftar', 'statusPendaftaran', 'statusKelulusan'));
     }
 }

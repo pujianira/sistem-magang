@@ -8,7 +8,13 @@
 </head>
 <body class="bg-gray-100">
     <div class="flex min-h-screen">
-        @include('layouts.sidebard')
+        @if($user->peran === 'Pembina')
+            @include('layouts.sidebarp')
+        @elseif($user->peran === 'Pembimbing')
+            @include('layouts.sidebarm')
+        @elseif($user->peran === 'Pendaftar')
+            @include('layouts.sidebard')
+        @endif
         <div class="flex-1 p-6 overflow-y-auto">
             <h1 class="text-2xl font-bold mb-8">Profil</h1>
             
