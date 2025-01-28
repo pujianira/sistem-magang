@@ -40,6 +40,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         return redirect()->intended(route('login', absolute: false));
+
     }
 
     /**
