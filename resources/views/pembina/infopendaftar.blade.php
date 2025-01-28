@@ -49,7 +49,7 @@
                        <div class="p-3 rounded-md mb-1">
                            <div class="flex items-center">
                                <h4 class="text-base font-medium text-gray-500 w-1/3">Tempat / Tanggal Lahir</h4>
-                               <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->tempat_lahir }} / {{ \Carbon\Carbon::parse($pendaftar->ttl)->format('d-m-Y') }}</p>
+                               <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->tempat_lahir }} / {{ \Carbon\Carbon::parse($pendaftar->tanggal_lahir)->format('d-m-Y') }}</p>
                            </div>
                        </div>
                        <div class="p-3 rounded-md mb-1">

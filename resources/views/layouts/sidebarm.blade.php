@@ -153,13 +153,33 @@
         return window.location.pathname;
     }
 
-    // Fungsi untuk mengatur menu aktif berdasarkan path
+    function isPathMatch(currentPath, menuPath) {
+        // Khusus untuk profile, hanya aktifkan profile section
+        if (currentPath.startsWith('/pembimbing/profile/')) {
+            // menuPath akan null/undefined untuk profile section karena menggunakan route name
+            return menuPath === null || menuPath === undefined;
+        }
+        // Untuk menu item lainnya, bandingkan path seperti biasa
+        return currentPath === menuPath;
+    }
+
     function setActiveMenu() {
-        // Hapus semua class active terlebih dahulu
+        const menuItems = document.querySelectorAll('.menu-item');
+        const profileSection = document.querySelector('.profile-section');
+        
+        // Hapus semua class active
         menuItems.forEach(item => item.classList.remove('active'));
+        profileSection.classList.remove('active');
         
         const currentPath = getCurrentPath();
-        // Cari dan aktifkan menu yang sesuai dengan path saat ini
+        
+        // Cek apakah ini halaman profile
+        if (currentPath.startsWith('/pembimbing/profile/')) {
+            profileSection.classList.add('active');
+            return;
+        }
+        
+        // Untuk menu item lainnya
         menuItems.forEach(item => {
             const href = item.getAttribute('href');
             if (currentPath === href) {

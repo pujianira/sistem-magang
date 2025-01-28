@@ -41,9 +41,16 @@
                                     NIM/NISN
                                 @endif
                             </label>
-                            <div class="mt-1 ml-4 block w-full">{{ $user->nama }}</div>
+                            <div class="mt-1 ml-4 block w-full">
+                                @if($user->peran === 'Pembimbing')
+                                    {{ $user->pembimbing->nip }}
+                                @elseif($user->peran === 'Pembina')
+                                    {{ $user->pembina->nip }}
+                                @elseif($user->peran === 'Pendaftar')
+                                    {{ $user->pendaftar->nim_nisn }}
+                                @endif
+                            </div>
                         </div>
-
                         
                         <!-- NIK Untuk Pendaftar -->
                         @if($user->peran === 'Pendaftar')  
@@ -51,20 +58,19 @@
                                 <label class="w-60 text-sm font-medium text-gray-700">
                                     NIK
                                 </label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama ?? 'NIK belum tersedia' }}</div>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->pendaftar->nik ?? 'NIK belum tersedia' }}</div>
                             </div>
                             <!-- Jenis Kelamin -->
                             <div class="flex items-center">
                                 <label class="w-60 text-sm font-medium text-gray-700">Jenis Kelamin</label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama ?? 'Jenis Kelamin belum tersedia'}}</div>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->pendaftar->jenis_kelamin ?? 'Jenis Kelamin belum tersedia'}}</div>
                             </div>
 
                         @endif
-                        
                         <!-- Peran -->
                         <div class="flex items-center">
                             <label class="w-60 text-sm font-medium text-gray-700">Peran</label>
-                            <div class="mt-1 ml-4 block w-full">{{ $user->nama }}</div>
+                            <div class="mt-1 ml-4 block w-full">{{ $user->peran }}</div>
                         </div>
 
                         <!-- Untuk Pendaftar -->
@@ -72,30 +78,33 @@
                             <!-- Agama -->
                             <div class="flex items-center">
                                 <label class="w-60 text-sm font-medium text-gray-700">Agama</label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama ?? 'Agama belum tersedia' }}</div>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->pendaftar->agama ?? 'Agama belum tersedia' }}</div>
                             </div>
                             <!-- Tempat, Tanggal Lahir -->
                             <div class="flex items-center">
                                 <label class="w-60 text-sm font-medium text-gray-700">Tempat, Tanggal Lahir</label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama ?? 'Tempat, Tanggal Lahir belum tersedia' }}</div>
+                                <div class="mt-1 ml-4 block w-full">
+                                    {{ $user->pendaftar->tempat_lahir ? $user->pendaftar->tempat_lahir . ', ' : '' }}
+                                    {{ $user->pendaftar->tanggal_lahir ? \Carbon\Carbon::parse($user->pendaftar->tanggal_lahir)->format('d-m-Y') : 'Tempat, Tanggal Lahir belum tersedia' }}
+                                </div>
                             </div>
                             <!-- Universitas/Sekolah -->
                             <div class="flex items-center">
                                 <label class="w-60 text-sm font-medium text-gray-700">Universitas/Sekolah</label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama ?? 'Universitas/Sekolah belum tersedia' }}</div>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->pendaftar->universitas_sekolah ?? 'Universitas/Sekolah belum tersedia' }}</div>
                             </div>
                             <!-- Jurusan -->
                             <div class="flex items-center">
                                 <label class="w-60 text-sm font-medium text-gray-700">Jurusan</label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama ?? 'Jurusan belum tersedia' }}</div>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->pendaftar->jurusan ?? 'Jurusan belum tersedia' }}</div>
                             </div>
                         @endif
                         
                         <!-- Bidang Untuk Pembimbing -->
-                        @if($user->peran === 'Pendaftar')  
+                        @if($user->peran === 'Pembimbing')  
                             <div class="flex items-center">
                                 <label class="w-60 text-sm font-medium text-gray-700">Bidang</label>
-                                <div class="mt-1 ml-4 block w-full">{{ $user->nama }}</div>
+                                <div class="mt-1 ml-4 block w-full">{{ $user->pembimbing->nama_bidang }}</div>
                             </div>
                         @endif
                     </div>
@@ -127,7 +136,7 @@
                         <!-- Alamat -->
                         <div class="flex items-center">
                             <label class="w-60 text-sm font-medium text-gray-700">Alamat Rumah</label>
-                            <div class="mt-1 ml-4 block w-full">{{ $user->email ?? 'Alamat belum tersedia' }}</div>
+                            <div class="mt-1 ml-4 block w-full">{{ $user->alamat ?? 'Alamat belum tersedia' }}</div>
                         </div>
                     </div>
                 </div>

@@ -106,8 +106,15 @@
         <a href="{{ route('profile.edit') }}" class="profile-section {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
             <div class="profile-image"></div>
             <div class="profile-info">
-                <p class="mb-1">{{ $user->nama }}</p>
-                <p>NIP. {{ $user->pembina->nip }}</p>
+                
+                @auth
+                    <p class="mb-1">{{ Auth::user()->nama }}</p>
+                    @if(Auth::user()->pembina)
+                        <p>NIP. {{ Auth::user()->pembina->nip }}</p>
+                    @endif
+                @else
+                    <p class="mb-1">Guest</p>
+                @endauth
             </div>
         </a>
 

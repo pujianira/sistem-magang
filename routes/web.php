@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
 
 //pembina
 Route::middleware(['auth', 'Pembina'])->group(function () {
+    // Route::get('/pembina/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/pembina/beranda', [HomeController::class, 'berandaPembina'])->name('beranda-Pembina'); 
     Route::get('/pembina/pendaftarmagang', [PendaftaranController::class, 'pendaftar'])->name('pendaftarmagang');
     Route::get('/pembina/pesertamagang', [PesertaController::class, 'daftarPeserta'])->name('pesertamagang');
@@ -33,10 +34,13 @@ Route::middleware(['auth', 'Pembina'])->group(function () {
     Route::post('/pembina/terima-pendaftaran/{nim_nisn}', [PendaftaranController::class, 'terimaPendaftaran'])->name('terima.pendaftaran');
     Route::post('/pembina/tolak-pendaftaran/{nim_nisn}', [PendaftaranController::class, 'tolakPendaftaran'])->name('tolak.pendaftaran');
     Route::get('/pembina/infopeserta/{nim_nisn}', [PesertaController::class, 'infoPeserta'])->name('infopeserta');
+    Route::post('/pembina/setujui-kelulusan/{nim_nisn}', [PesertaController::class, 'setujuiKelulusan'])->name('setujui.kelulusan');
+    Route::post('/pembina/tolak-kelulusan/{nim_nisn}', [PesertaController::class, 'tolakKelulusan'])->name('tolak.kelulusan');
 });
 
 //pembimbing
 Route::middleware(['auth', 'Pembimbing'])->group(function () {
+    // Route::get('/pembimbing/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/pembimbing/beranda', [HomeController::class, 'berandaPembimbing'])->name('beranda-Pembimbing'); 
     Route::get('/pembimbing/pesertamagang', [PesertaController::class, 'daftarMentee'])->name('pesertamagang');
     Route::get('/pembimbing/penilaian', [PenilaianController::class, 'index'])->name('penilaian');
@@ -44,6 +48,7 @@ Route::middleware(['auth', 'Pembimbing'])->group(function () {
 
 //pendaftar
 Route::middleware(['auth', 'Pendaftar'])->group(function () {
+    // Route::get('/pendaftar/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/pendaftar/beranda', [HomeController::class, 'berandaPendaftar'])->name('beranda-Pendaftar'); 
     Route::get('/pendaftar/daftarmagang', [PendaftaranController::class, 'daftarMagang'])->name('daftarmagang'); 
     Route::post('/pendaftar/daftarmagang', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
