@@ -102,7 +102,7 @@
             <h1 class="text-xl font-bold">DinfoMagang</h1>
         </div>
         
-        <a href="{{ route('profile.edit') }}" class="profile-section {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
+        <a href="{{ route('profile.show') }}" class="profile-section {{ request()->routeIs('profile.show') ? 'active' : '' }}">
             <div class="profile-image"></div>
             <div class="profile-info">
                 <p class="mb-1">{{ $user->nama }}</p>
