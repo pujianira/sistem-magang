@@ -6,15 +6,29 @@ use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BerandaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('home');
 });
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/home', [BerandaController::class, 'home'])->name('home');
+Route::get('/profil', [BerandaController::class, 'profil'])->name('profil');
+Route::get('/info-bidang', [BerandaController::class, 'infobidang'])->name('info-bidang');
+Route::get('/kontak', [BerandaController::class, 'kontak'])->name('kontak');
+
+Route::get('/login', function () {
+    return view('auth/login');
+});
+
+Route::get('/register', function () {
+    return view('auth/register');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');

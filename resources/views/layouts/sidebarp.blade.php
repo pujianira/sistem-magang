@@ -131,7 +131,7 @@
                 <i class="fas fa-users"></i>
                 <span>Peserta Magang</span>
             </a>
-            <a href="#" 
+            <a href="{{ route('logout') }}" 
                 class="menu-item" 
                 id="logoutLink"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -124,7 +124,7 @@
                 <i class="fas fa-clipboard-list"></i>
                 <span>Penilaian</span>
             </a>
-            <a href="#" 
+            <a href="{{ route('login') }}" 
                 class="menu-item" 
                 id="logoutLink"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
