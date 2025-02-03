@@ -11,7 +11,7 @@
             <div class="overlay"></div>
             <div class="banner-text">
                 <h1>Selamat Datang</h1>
-                <p>Sistem Informasi Pendaftaran Magang Dinas Komunikasi, Informatika, Statistik dan Persandian (Diskominfo) Kota Semarang</p>
+                <p>Sistem Informasi Magang Dinas Komunikasi, Informatika, Statistik dan Persandian (Diskominfo) Kota Semarang</p>
             </div> 
         </div>
     </div>

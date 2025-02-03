@@ -8,7 +8,7 @@
             <div class="overlay absolute inset-0 bg-black bg-opacity-50"></div>
             <div class="banner-text relative z-10">
                 <h1 class="text-4xl font-bold uppercase">Kontak</h1>
-                <p class="text-lg">Magang Diskominfo Semarang</p>
+                <p class="text-lg">Magang Diskominfo Kota Semarang</p>
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
         <div class="about-content max-w-4xl w-full flex flex-col md:flex-row gap-10">
             <div class="about-text flex-1">
                 <h2 class="text-3xl font-bold text-blue-900 mb-4">Kami Siap Membantu</h2>
-                <p class="text-lg text-gray-700 leading-relaxed">Hubungi kami untuk informasi lebih lanjut atau pertanyaan terkait layanan kami. Tim kami siap memberikan bantuan yang Anda butuhkan.</p>
+                <p class="text-lg text-gray-700 leading-relaxed">Hubungi kami untuk informasi lebih lanjut atau pertanyaan terkait informasi magang Diskominfo Kota Semarang. Tim kami siap memberikan bantuan yang Anda butuhkan.</p>
                 
                 <div class="list-social flex gap-4 mt-6">
                     <a class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white" href="https://www.facebook.com/diskominfokotasemarang/" target="_blank">
