@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header Scroll Effect</title>
+    <title>Header</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <style>
-        /* Header Awal */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #022539; /* Warna awal */
+            height: 80px;
+            background-color: #022539; 
             color: white;
-            padding: 15px 20px;
+            padding: 10px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -23,36 +22,49 @@
             z-index: 1000;
         }
 
-        /* Header Saat Discroll */
         .header.scrolled {
-            background-color: white; /* Warna saat discroll */
-            color: #022539; /* Warna font saat discroll */
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+            background-color: white; 
+            color: #022539; 
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
         }
 
-        /* Warna Link Saat Header Discroll */
         .header.scrolled a {
-            color: #022539; /* Warna navy */
+            color: #022539; 
         }
 
         .header.scrolled a:hover {
-            color: #F97316; /* Warna hover tetap oranye */
+            color: #F97316; 
         }
 
-        /* Supaya konten tidak ketutupan header */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; 
+        }
+
+        .logo-container img {
+            height: 40px; 
+        }
+
+        .logo-container span {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
         body {
             padding-top: 70px;
         }
     </style>
 </head>
 <body>
-
-    <!-- Header -->
-    <header class="header">
-        <div class="container mx-auto flex items-center justify-between py-4 px-6">
-            <h1 class="text-xl font-bold">Dinfo Magang</h1>
+    <header class="header flex items-center justify-between px-6">
+        <div class="logo-container flex items-center">
+            <img src="img/Lambang_Kota_Semarang.png" alt="Logo Pemkot Semarang" class="h-10">
+            <span class="text-xl font-bold ml-3">DINFO MAGANG</span>
+        </div>
             <nav>
-                <ul class="flex items-center space-x-10">
+                <ul class="flex items-center space-x-28 transform -translate-x-6">
                     <li>
                         <a href="{{ route('home') }}" 
                            class="font-bold hover:text-orange-300 pb-2 {{ Request::routeIs('home') ? 'border-b-2 border-orange-500' : '' }}">
@@ -91,18 +103,15 @@
             </nav>
         </div>
     </header>
-
-    <!-- JavaScript untuk Mengubah Warna Header Saat Discroll -->
     <script>
         window.addEventListener("scroll", function() {
             var header = document.querySelector(".header");
-            if (window.scrollY > 50) { // Kalau scroll lebih dari 50px
+            if (window.scrollY > 50) { 
                 header.classList.add("scrolled");
             } else {
                 header.classList.remove("scrolled");
             }
         });
     </script>
-
 </body>
 </html>
