@@ -3,7 +3,6 @@
 @section('title', 'Beranda')
 
 @section('content')
-    <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     
     <div class="container mx-auto flex items-center justify-between py-30">
@@ -61,6 +60,62 @@
                         <div class="icon"><i class="fas fa-users"></i></div>
                         <h4>Sekretariat</h4>
                         <!-- <p>- Kepegawaian & Jabatan Fungsional<br>- Keterbukaan Informasi Publik</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="requirements">
+            <div class="requirements-heading text-center mb-4">
+                <h2>Berkas yang Perlu Dipersiapkan</h2>
+            </div>
+            <div class="requirements-container">
+                <div class="requirement-item">
+                    <div class="requirement-image">
+                        <img src="{{ asset('img/surat.png') }}" alt="Surat Permohonan">
+                    </div>
+                    <div class="requirement-content">
+                        <h4>Surat Permohonan</h4>
+                        <p>Surat Permohonan izin magang dari universitas/sekolah, berisi:
+                            <br>a. Nama dan NIM
+                            <br>b. Jurusan dan Fakultas/Sekolah
+                            <br>c. Durasi Magang
+                            <br>d. Rencana jadwal magang
+                        </p>
+                    </div>
+                </div>
+                <div class="requirement-item">
+                    <div class="requirement-image">
+                        <img src="{{ asset('img/proposal.png') }}" alt="Proposal">
+                    </div>
+                    <div class="requirement-content">
+                        <h4>Proposal</h4>
+                        <p>
+                            - Latar belakang magang
+                            <br>- Maksud dan tujuan magang
+                            <br>- Rencana dan durasi magang
+                            <br>- Kompetensi yang dimiliki mahasiswa
+                            <br>- Surat pernyataan bersedia mengikuti
+                            <br>- Surat pernyataan bersedia membuat laporan magang setiap minggu
+                        </p>
+                    </div>
+                </div>
+                <div class="requirement-item">
+                    <div class="requirement-image">
+                        <img src="{{ asset('img/cv.png') }}" alt="Creative CV">
+                    </div>
+                    <div class="requirement-content">
+                        <h4>Creative CV</h4>
+                        <p>
+                            - Nama, NIM, foto terbaru
+                            <br>- Tempat, tanggal lahir
+                            <br>- Alamat, email dan no. telepon aktif
+                            <br>- Jurusan, fakultas, univ/sekolah
+                            <br>- Sejarah pendidikan
+                            <br>- Hobi dan minat
+                            <br>- Kompetensi yang dimiliki saat ini
+                            <br>- Diklat, seminar, workshop yang diikuti
+                            <br>- Organisasi yang pernah/sedang diikuti
+                        </p>
                     </div>
                 </div>
             </div>
@@ -158,7 +213,6 @@
 
         .services {
             padding: 50px 50px;
-            /* background: url('img/classroom.jpg') center/cover no-repeat; */
         }
 
         .services .owl-carousel {
@@ -172,9 +226,14 @@
             border-radius: 10px;
             padding: 30px;
             margin: 15px;
+            min-height: 250px; 
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
         }
 
         .service-item:hover {
@@ -222,14 +281,89 @@
         .owl-dot.active span {
             opacity: 1;
         }
-    </style>
 
-    <!-- Include necessary libraries -->
+        .requirements-heading h2 {
+            font-size: 2.5rem;
+            color: #022539;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .requirements-container {
+            display: flex;
+            justify-content: space-between;
+            overflow-x: auto; /* Memungkinkan scroll horizontal jika layar sempit */
+            gap: 20px; /* Jarak antar item */
+            padding-bottom: 20px; /* Ruang untuk scrollbar */
+        }
+
+        .requirement-item {
+            flex: 0 0 calc(33.333% - 20px); /* Lebar item dengan margin */
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            min-width: 300px; /* Lebar minimum item */
+        }
+
+        .requirement-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .requirement-image {
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            overflow: hidden;
+            width: 50%; /* Kurangi lebar */
+            margin: 0 auto; /* Pusatkan */
+            position: relative;
+            top: 10px; /* Sedikit turunkan */
+        }
+
+        .requirement-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+
+        .requirement-content {
+            padding: 20px;
+        }
+
+        .requirement-content h4 {
+            color: #022539;
+            margin-bottom: 15px;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .requirement-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .requirements-container {
+                flex-wrap: nowrap;
+                overflow-x: scroll;
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling pada iOS */
+            }
+
+            .requirement-item {
+                flex: 0 0 80%; /* Item lebih lebar pada layar kecil */
+            }
+        }
+ 
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
     <script>
     $(document).ready(function(){
         $('.owl-carousel').owlCarousel({
