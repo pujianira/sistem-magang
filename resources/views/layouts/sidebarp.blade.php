@@ -104,9 +104,12 @@
         </div>
         
         <a href="{{ route('profile.show') }}" class="profile-section {{ request()->routeIs('profile.show') ? 'active' : '' }}">
-            <div class="profile-image"></div>
+            <div class="profile-image">
+                <img src="{{ Auth::user()->foto ? asset('img/profil/' . Auth::user()->foto) : asset('img/pasfoto.jpg') }}" 
+                    alt="Foto Profil" 
+                    class="w-full h-full object-cover rounded-full">
+            </div>
             <div class="profile-info">
-                
                 @auth
                     <p class="mb-1">{{ Auth::user()->nama }}</p>
                     @if(Auth::user()->pembina)

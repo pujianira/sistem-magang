@@ -16,20 +16,30 @@
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
-
         <!-- Foto Profil -->
         <div class="flex justify-center mb-6">
             <div class="relative">
-                <img id="preview" src="{{ asset('img/pasfoto.jpg') }}" alt="fotoprofil" class="w-40 h-40 border object-cover rounded-lg">
-                <input type="file" name="foto" id="foto" class="hidden" accept="image/*" onchange="previewImage()">
-                <label for="foto" class="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow cursor-pointer">
+                <img id="preview" 
+                    src="{{ $user->foto ? asset('img/profil/' . $user->foto) : asset('img/pasfoto.jpg') }}" 
+                    alt="fotoprofil" 
+                    class="w-40 h-40 border object-cover rounded-lg">
+                
+                <input type="file" 
+                    name="foto" 
+                    id="foto" 
+                    class="hidden" 
+                    accept="image/*" 
+                    onchange="previewImage(this)">
+                
+                <label for="foto" 
+                    class="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                     </svg>
                 </label>
             </div>
         </div>
-
+  
         <!-- Nama -->
         <div>
             <x-input-label for="nama" :value="__('Nama')" />
@@ -146,15 +156,27 @@
     </form>
 
     <script>
-        function previewImage() {
-            const input = document.getElementById('foto');
-            const preview = document.getElementById('preview');
+        // function previewImage() {
+        //     const input = document.getElementById('foto');
+        //     const preview = document.getElementById('preview');
             
+        //     if (input.files && input.files[0]) {
+        //         const reader = new FileReader();
+                
+        //         reader.onload = function(e) {
+        //             preview.src = e.target.result;
+        //         }
+                
+        //         reader.readAsDataURL(input.files[0]);
+        //     }
+        // }
+
+        function previewImage(input) {
             if (input.files && input.files[0]) {
-                const reader = new FileReader();
+                var reader = new FileReader();
                 
                 reader.onload = function(e) {
-                    preview.src = e.target.result;
+                    document.getElementById('preview').src = e.target.result;
                 }
                 
                 reader.readAsDataURL(input.files[0]);

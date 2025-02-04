@@ -17,10 +17,11 @@
         @endif
         <div class="flex-1 p-6 overflow-y-auto">
             <h1 class="text-2xl font-bold mb-8">Profil</h1>
-            
             <div class="flex justify-center mb-6">
-                <img src="{{ asset('img/pasfoto.jpg') }}" alt="fotoprofil" class="w-40 h-40 border object-cover">
-            </div>            
+                <img src="{{ $user->foto ? asset('img/profil/' . $user->foto) : asset('img/pasfoto.jpg') }}" 
+                    alt="fotoprofil" 
+                    class="w-40 h-40 border object-cover rounded-lg">
+            </div>
 
             <div class="flex justify-end mt-4 mb-4">
                 <a href="{{ route('profile.edit') }}" class="py-2 px-4 border border-transparent shadow-sm text-sm font-bold rounded-md text-white bg-[#FB991A] hover:bg-orange-600 transition duration-300">

@@ -58,8 +58,20 @@ class ProfileController extends Controller
         ]);
 
         if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('profile-photos', 'public');
-            $user->foto = $path;
+            // Hapus foto lama jika ada
+            if ($user->foto && file_exists(public_path('img/profil/' . $user->foto))) {
+                unlink(public_path('img/profil/' . $user->foto));
+            }
+    
+            // Generate nama file unik
+            $filename = time() . '.' . $request->foto->extension();
+            
+            // Simpan file di folder public/img/profil
+            $request->foto->move(public_path('img/profil'), $filename);
+    
+            // Update path foto di database
+            $user->foto = $filename;
+            $user->save();
         }
 
         $user->fill($request->only('nama', 'email', 'no_hp', 'alamat'));
