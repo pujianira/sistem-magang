@@ -17,7 +17,7 @@ class PesertaController extends Controller
         $pesertaData = Pendaftar::with('user:id,nama,no_hp')
             ->where('status_pendaftaran', 'diterima')
             ->orderBy('status_kelulusan', $request->input('direction', 'asc'))
-            ->get();
+            ->paginate(10);
 
         $totalPeserta = $pesertaData->count();
 
