@@ -102,8 +102,12 @@
             <h1 class="text-xl font-bold">DinfoMagang</h1>
         </div>
         
-        <a href="{{ route('profile.edit') }}" class="profile-section {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
-            <div class="profile-image"></div>
+        <a href="{{ route('profile.show') }}" class="profile-section {{ request()->routeIs('profile.show') ? 'active' : '' }}">
+            <div class="profile-image">
+                <img src="{{ Auth::user()->foto ? asset('img/profil/' . Auth::user()->foto) : asset('img/pasfoto.jpg') }}" 
+                    alt="Foto Profil" 
+                    class="w-full h-full object-cover rounded-full">
+            </div>
             <div class="profile-info">
                 <p class="mb-1">{{ $user->nama }}</p>
                 <p>NIS/NIM. {{ $user->pendaftar->nim_nisn }}</p>

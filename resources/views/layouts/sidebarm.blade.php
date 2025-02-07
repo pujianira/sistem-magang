@@ -103,8 +103,12 @@
             {{-- <h1 class="text-xl font-bold">MAGANG DISKOMINFO</h1> --}}
         </div>
         
-        <a href="{{ route('profile.edit') }}" class="profile-section {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
-            <div class="profile-image"></div>
+        <a href="{{ route('profile.show') }}" class="profile-section {{ request()->routeIs('profile.show') ? 'active' : '' }}">
+            <div class="profile-image">
+                <img src="{{ Auth::user()->foto ? asset('img/profil/' . Auth::user()->foto) : asset('img/pasfoto.jpg') }}" 
+                    alt="Foto Profil" 
+                    class="w-full h-full object-cover rounded-full">
+            </div>
             <div class="profile-info">
                 <p class="mb-1">{{ $user->nama }}</p>
                 <p>NIP. {{ $user->pembimbing->nip }}</p>
@@ -124,7 +128,7 @@
                 <i class="fas fa-clipboard-list"></i>
                 <span>Penilaian</span>
             </a>
-            <a href="#" 
+            <a href="{{ route('login') }}" 
                 class="menu-item" 
                 id="logoutLink"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -153,13 +157,33 @@
         return window.location.pathname;
     }
 
-    // Fungsi untuk mengatur menu aktif berdasarkan path
+    function isPathMatch(currentPath, menuPath) {
+        // Khusus untuk profile, hanya aktifkan profile section
+        if (currentPath.startsWith('/pembimbing/profile/')) {
+            // menuPath akan null/undefined untuk profile section karena menggunakan route name
+            return menuPath === null || menuPath === undefined;
+        }
+        // Untuk menu item lainnya, bandingkan path seperti biasa
+        return currentPath === menuPath;
+    }
+
     function setActiveMenu() {
-        // Hapus semua class active terlebih dahulu
+        const menuItems = document.querySelectorAll('.menu-item');
+        const profileSection = document.querySelector('.profile-section');
+        
+        // Hapus semua class active
         menuItems.forEach(item => item.classList.remove('active'));
+        profileSection.classList.remove('active');
         
         const currentPath = getCurrentPath();
-        // Cari dan aktifkan menu yang sesuai dengan path saat ini
+        
+        // Cek apakah ini halaman profile
+        if (currentPath.startsWith('/pembimbing/profile/')) {
+            profileSection.classList.add('active');
+            return;
+        }
+        
+        // Untuk menu item lainnya
         menuItems.forEach(item => {
             const href = item.getAttribute('href');
             if (currentPath === href) {

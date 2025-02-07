@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Bidang;
 use App\Models\Pendaftar;
 use App\Models\Periode;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class PendaftaranController extends Controller
@@ -20,7 +21,7 @@ class PendaftaranController extends Controller
         ->whereHas('user')  
         ->where('status_pendaftaran', '!=', 'Belum Mendaftar') 
         ->orderBy('status_pendaftaran', $request->input('direction', 'asc'))
-        ->get();
+        ->paginate(10);
     
     $totalPendaftar = $pendaftarData->count();
 
@@ -56,6 +57,7 @@ class PendaftaranController extends Controller
 
         public function infoPendaftar($nim_nisn)
     {
+        $user = Auth::user();
         $pendaftar = Pendaftar::where('nim_nisn', $nim_nisn)->first();
         $user = $pendaftar->users;
         $pembina = $pendaftar->pembina;
@@ -73,6 +75,7 @@ class PendaftaranController extends Controller
 
         try {
             $pendaftar->status_pendaftaran = 'Diterima';
+            $pendaftar->status_kelulusan = 'Aktif';
             $pendaftar->save();
             
             return redirect()->back()->with('success', 'Pendaftaran berhasil diterima');

@@ -117,6 +117,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="mt-4 px-6">
+                                {{ $pendaftarData->withQueryString()->links('pagination::tailwind') }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -124,5 +127,26 @@
         </div>
     </div>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <style>
+        nav[role="navigation"] {
+            @apply flex justify-center mt-4;
+        }
+        
+        .pagination {
+            @apply flex rounded-lg;
+        }
+        
+        .pagination > div {
+            @apply px-3 py-2 bg-white border text-sm;
+        }
+        
+        .pagination span {
+            @apply px-3 py-2;
+        }
+        
+        .pagination a {
+            @apply hover:bg-gray-100;
+        }
+    </style> -->
 </body>
 </html>

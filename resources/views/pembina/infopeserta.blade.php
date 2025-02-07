@@ -89,11 +89,6 @@
                            </div>
                        </div>           
                     </div>
-                    <div class="flex justify-end">
-                        <button class="bg-[#FB991A] text-white px-6 py-2 rounded-md hover:bg-orange-600 transition duration-300 font-bold">
-                            Beri Izin Cetak
-                        </button>
-                    </div>
                 </div>
                 <h1 class="text-lg font-bold mt-4 mb-2 p-4">Laporan Magang</h1>
                 <div class="bg-white rounded-lg shadow-md p-6">
@@ -123,6 +118,12 @@
                     </div>
                     <div class="p-3 rounded-md mb-1">
                         <div class="flex items-center">
+                            <h4 class="text-base font-medium text-gray-500 w-1/3">Nilai</h4>
+                            <p class="text-md text-gray-800 w-2/3">Nilai</p>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-md mb-1">
+                        <div class="flex items-center">
                             <h4 class="text-base font-medium text-gray-500 w-1/3">Status Kelulusan</h4>
                             @if($peserta->status_kelulusan == 'Belum Mendaftar')
                                 <p class="text-md text-gray-600 font-bold inline-block bg-gray-100 px-2 py-1 rounded">Belum Mendaftar</p>
@@ -137,14 +138,100 @@
                             @endif
                         </div>
                     </div>
-                    <div class="flex justify-end">
-                        <button class="bg-[#FB991A] text-white px-6 py-2 rounded-md hover:bg-orange-600 transition duration-300 font-bold">
-                            Beri Izin Cetak
+                    <div class="flex justify-end gap-4"> <!-- Tambahkan gap-4 untuk spacing antar button -->
+                        <button onclick="konfirmasiSetujuKelulusan('{{ route('setujui.kelulusan', $peserta->nim_nisn) }}')" 
+                                class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition duration-300 font-bold @if($peserta->status_kelulusan != 'Aktif') opacity-50 cursor-not-allowed @endif"
+                                @if($peserta->status_kelulusan != 'Aktif') disabled @endif>
+                            Setujui Kelulusan
+                        </button>
+                        
+                        <button onclick="konfirmasiTolakKelulusan('{{ route('tolak.kelulusan', $peserta->nim_nisn) }}')" 
+                                class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition duration-300 font-bold @if($peserta->status_kelulusan != 'Aktif') opacity-50 cursor-not-allowed @endif"
+                                @if($peserta->status_kelulusan != 'Aktif') disabled @endif>
+                            Tolak Kelulusan
                         </button>
                     </div>
                 </div>
            </div>
        </div>
    </div>
+   <script>
+    function konfirmasiSetujuKelulusan(url) {
+        Swal.fire({
+            title: 'Konfirmasi Kelulusan',
+            text: "Apakah Anda yakin ingin menyetujui kelulusan peserta ini?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Setujui!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = url;
+                
+                const csrfToken = document.createElement('input');
+                csrfToken.type = 'hidden';
+                csrfToken.name = '_token';
+                csrfToken.value = '{{ csrf_token() }}';
+                form.appendChild(csrfToken);
+                
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    }
+
+    function konfirmasiTolakKelulusan(url) {
+        Swal.fire({
+            title: 'Konfirmasi Penolakan Kelulusan',
+            text: "Apakah Anda yakin ingin menolak kelulusan peserta ini?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Tolak!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = url;
+                
+                const csrfToken = document.createElement('input');
+                csrfToken.type = 'hidden';
+                csrfToken.name = '_token';
+                csrfToken.value = '{{ csrf_token() }}';
+                form.appendChild(csrfToken);
+                
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    }
+
+    // Flash messages
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ session('success') }}',
+            timer: 3000,
+            showConfirmButton: false
+        });
+    @endif
+
+    @if(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: '{{ session('error') }}',
+            timer: 3000,
+            showConfirmButton: false
+        });
+    @endif
+</script>w
 </body>
 </html>
