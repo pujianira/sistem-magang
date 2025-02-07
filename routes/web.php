@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DaftarMagangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PesertaController;
@@ -40,14 +41,19 @@ Route::middleware(['auth', 'Pembimbing'])->group(function () {
     Route::get('/pembimbing/beranda', [HomeController::class, 'berandaPembimbing'])->name('beranda-Pembimbing'); 
     Route::get('/pembimbing/pesertamagang', [PesertaController::class, 'daftarMentee'])->name('pesertamagang');
     Route::get('/pembimbing/penilaian', [PenilaianController::class, 'index'])->name('penilaian');
+    Route::get('/pembina/filterBidangPeserta', [PesertaController::class, 'filterBidangPeserta'])->name('filter.bidangpeserta');
 });
 
 //pendaftar
 Route::middleware(['auth', 'Pendaftar'])->group(function () {
     Route::get('/pendaftar/beranda', [HomeController::class, 'berandaPendaftar'])->name('beranda-Pendaftar'); 
-    Route::get('/pendaftar/daftarmagang', [PendaftaranController::class, 'daftarMagang'])->name('daftarmagang'); 
-    Route::post('/pendaftar/daftarmagang', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
+    Route::get('/pendaftar/daftarmagang', [DaftarMagangController::class, 'daftarMagang'])->name('daftarmagang'); 
+    Route::post('/pendaftar/daftarmagang', [DaftarMagangController::class, 'store'])->name('pendaftaran.store');
+    Route::get('/view-file/{filename}', [DaftarMagangController::class, 'viewFile'])->name('view-file');
+    Route::get('/surat-penerimaan', [DaftarMagangController::class, 'cetakSuratPenerimaan'])->name('cetaksuratpenerimaan');
     Route::get('/pendaftar/laporanmagang', [LaporanController::class, 'kirimLaporan'])->name('kirimLaporan'); 
+    Route::post('/pendaftar/laporanmagang', [LaporanController::class, 'store'])->name('laporan.store');
+    Route::get('/surat-kelulusan', [LaporanController::class, 'cetakSuratKelulusan'])->name('cetaksuratkelulusan');
 });
 
 // Route::get('/dashboard', function () {

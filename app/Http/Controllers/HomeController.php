@@ -98,6 +98,7 @@ class HomeController extends Controller
         $namaPendaftar = $user->nama;
         $statusPendaftaran = $user->pendaftar->status_pendaftaran;
         $statusKelulusan = $user->pendaftar->status_kelulusan;
-        return view('pendaftar.beranda-pendaftar', compact('user', 'namaPendaftar', 'statusPendaftaran', 'statusKelulusan'));
+        $pendaftar = $user->pendaftar;
+        return view('pendaftar.beranda-pendaftar', compact('user', 'namaPendaftar', 'statusPendaftaran', 'statusKelulusan', 'pendaftar'));
     }
 }

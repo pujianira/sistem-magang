@@ -9,10 +9,11 @@ class Pendaftar extends Model
     protected $table = 'pendaftar';
     public $timestamps = false;
     protected $primaryKey = 'nim_nisn';
-    public $incrementing = false; // Since nim_nisn is not auto-incrementing
+    public $incrementing = false; 
     protected $keyType = 'string';
 
-    protected $fillable = ['nim_nisn', 'user_id', 'nik', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'agama', 'universitas_sekolah', 'jurusan', 'surat_permohonan', 'proposal', 'curriculum_vitae', 'laporan', 'bulan_mulai', 'tahun_mulai', 'durasi', 'id_bidang', 'nama_bidang', 'tanggal_pendaftaran', 'status_pendaftaran', 'status_kelulusan', 'nip_pembina', 'nip_pembimbing'];
+    protected $fillable = ['nim_nisn', 'user_id', 'nik', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'agama', 'universitas_sekolah', 'jurusan', 'surat_permohonan', 'proposal', 'curriculum_vitae', 'laporan', 'judul_laporan', 
+                    'jenis_karya', 'deskripsi_karya', 'tanggal_kirimlaporan', 'bulan_mulai', 'tahun_mulai', 'durasi', 'id_bidang', 'nama_bidang', 'tanggal_pendaftaran', 'status_pendaftaran', 'status_kelulusan', 'nip_pembina', 'nip_pembimbing'];
     
     public function user()
     {

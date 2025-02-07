@@ -27,13 +27,13 @@ class PendaftaranController extends Controller
     return view('pembina.pendaftarmagang', compact('user', 'bidangs', 'pendaftarData', 'totalPendaftar'));
 }
 
-    public function daftarMagang() 
-    {
-        $user = auth()->user(); 
-        $bidangs = Bidang::all();
-        $periodes = Periode::all();
-        return view('pendaftar.daftarmagang', compact('user', 'bidangs', 'periodes'));
-    }
+    // public function daftarMagang() 
+    // {
+    //     $user = auth()->user(); 
+    //     $bidangs = Bidang::all();
+    //     $periodes = Periode::all();
+    //     return view('pendaftar.daftarmagang', compact('user', 'bidangs', 'periodes'));
+    // }
 
     public function filterBidang(Request $request)
     {
