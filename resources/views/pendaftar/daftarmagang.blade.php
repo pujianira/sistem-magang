@@ -326,7 +326,7 @@
                             
                             <!-- Pesan -->
                             <h3 class="text-xl font-semibold text-gray-800 mb-2">Mohon maaf, Anda Tidak Diterima</h3>
-                            <p class="text-gray-600 mb-6">Mohon maaf, Anda tidak diterima magang ini karena berkas kurang lengkap atau kuota sudah penuh. <br>Silakan coba di lain kesempatan ya. Semangat!</p>
+                            <p class="text-gray-600 mb-6">Mohon maaf, Anda tidak diterima magang ini karena berkas kurang lengkap. <br>Silakan coba di lain kesempatan ya. Semangat!</p>
                         
                             <!-- Tips atau CTA -->
                             {{-- <div>

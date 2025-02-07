@@ -114,6 +114,7 @@ class DaftarMagangController extends Controller
                 'curriculum_vitae' => $cvPath,
                 // 'cv' => $cvPath,
                 'status_pendaftaran' => 'Menunggu', 
+                'status_kelulusan' => 'Menunggu', 
                 'tanggal_pendaftaran' => $tanggalPendaftaran, 
             ]);
             
@@ -145,6 +146,24 @@ class DaftarMagangController extends Controller
 // $user->save();
 
         return redirect()->back()->with('success', 'Data berhasil diperbarui!');
+    }
+
+    public function cetakSuratPenerimaan()
+    {
+        $user = Auth::user();
+
+        $pendaftar = Pendaftar::where('user_id', $user->id)->first();
+
+        $data = [
+            'nama' => $user->nama, 
+            'nim' => $pendaftar->nim_nisn,
+            'bidang' => $pendaftar->nama_bidang,
+            'tanggal' => now()->locale('id')->isoFormat('D MMMM Y')
+        ];
+
+        $pdf = PDF::loadView('pendaftar.suratpenerimaan-pendaftar', $data);
+
+        return $pdf->download('Surat_Kelulusan_Penerimaan.pdf');
     }
 
     public function viewFile($filename)

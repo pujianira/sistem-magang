@@ -37,7 +37,7 @@ return new class extends Migration
             $table->integer('durasi')->nullable();
             $table->date('tanggal_pendaftaran')->nullable();
             $table->enum('status_pendaftaran', ['Belum Mendaftar', 'Menunggu', 'Diterima', 'Ditolak']);
-            $table->enum('status_kelulusan', ['Belum Mendaftar', 'Proses Pendaftaran', 'Aktif', 'Menunggu', 'Lulus', 'Tidak Lulus']);
+            $table->enum('status_kelulusan', ['Belum Mendaftar', 'Menunggu', 'Aktif', 'Proses Pemeriksaan', 'Lulus', 'Tidak Lulus']);
             $table->string('nip_pembina', 18);
             $table->string('nip_pembimbing', 18)->nullable();
         });
