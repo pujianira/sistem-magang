@@ -117,9 +117,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <div class="mt-4 px-6">
-                                {{ $pendaftarData->withQueryString()->links('pagination::tailwind') }}
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

@@ -31,10 +31,13 @@
                <div class="bg-white rounded-lg shadow-md p-6">
                    <!-- Profile Photo -->
                    <div class="flex justify-center mb-8">
-                       <div class="w-24 h-24 bg-gray-500 rounded-full overflow-hidden">
-                           <img src="https://via.placeholder.com/150" 
-                                alt="Profile picture of John Doe" 
-                                class="w-full h-full object-cover">
+                       <div class="w-24 h-24 bg-gray-500 rounded-lg overflow-hidden">
+                       <a href="{{ asset('storage/'.$peserta->user->foto) }}" target="_blank">
+                            <img src="{{ asset('storage/'.$peserta->user->foto) }}" 
+                                alt="Profile picture" 
+                                class="w-full h-full object-cover" 
+                                id="preview">
+                        </a>
                        </div>
                    </div>
 
@@ -95,32 +98,96 @@
                     <div class="p-3 rounded-md mb-1">
                         <div class="flex items-center">
                             <h4 class="text-base font-medium text-gray-500 w-1/3">Judul Laporan</h4>
-                            <p class="text-md text-gray-800 w-2/3">--- Judul Laporan ---</p>
+                            <p class="text-md w-2/3 
+                                @if (!$peserta->judul_laporan) italic text-gray-500 @else text-gray-800 @endif">
+                                {{ $peserta->judul_laporan ?? 'Laporan belum dikirim' }}
+                            </p>
                         </div>
                     </div>
                     <div class="p-3 rounded-md mb-1">
                         <div class="flex items-center">
                             <h4 class="text-base font-medium text-gray-500 w-1/3">Jenis Karya</h4>
-                            <p class="text-md text-gray-800 w-2/3">--- Jenis Karya ---</p>
+                            <p class="text-md w-2/3 
+                                @if (!$peserta->jenis_karya) italic text-gray-500 @else text-gray-800 @endif">
+                                {{ $peserta->jenis_karya ?? 'Laporan belum dikirim' }}
+                            </p>
                         </div>
                     </div>
                     <div class="p-3 rounded-md mb-1">
                         <div class="flex items-center">
                             <h4 class="text-base font-medium text-gray-500 w-1/3">Deskripsi Karya</h4>
-                            <p class="text-md text-gray-800 w-2/3">--- Deskripsi Karya ---</p>
+                            <p class="text-md w-2/3 
+                                @if (!$peserta->deskripsi_karya) italic text-gray-500 @else text-gray-800 @endif">
+                                {{ $peserta->deskripsi_karya ?? 'Laporan belum dikirim' }}
+                            </p>
                         </div>
                     </div>
                     <div class="p-3 rounded-md mb-1">
                         <div class="flex items-center">
                             <h4 class="text-base font-medium text-gray-500 w-1/3">Laporan</h4>
-                            <p class="text-md text-gray-800 w-2/3">Laporan</p>
+                            <div class="w-2/3">
+                            <button 
+                                onclick="window.open('{{ asset('storage/'.$peserta->laporan) }}')" 
+                                class="inline-flex items-center gap-2 px-4 py-2 border rounded-md transition 
+                                    @if ($peserta->laporan) bg-white border-gray-200 hover:bg-gray-50 
+                                    @else bg-gray-200 text-gray-400 cursor-not-allowed @endif"
+                                @if (!$peserta->laporan) disabled @endif
+                            >
+                                <span>Lihat Laporan</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </button>
+                            </div>
                         </div>
                     </div>
                     <div class="p-3 rounded-md mb-1">
-                        <div class="flex items-center">
-                            <h4 class="text-base font-medium text-gray-500 w-1/3">Nilai</h4>
-                            <p class="text-md text-gray-800 w-2/3">Nilai</p>
-                        </div>
+                    <div class="flex items-center">
+                        <h4 class="text-base font-medium text-gray-500 w-1/3">Nilai</h4>
+                        <button 
+                            onclick="showNilaiModal()"
+                            class="inline-flex items-center gap-2 px-4 py-2 border rounded-md transition 
+                                {{ $peserta->nilai ? 'bg-white border-gray-200 hover:bg-gray-50' : 'bg-gray-200 text-gray-400 cursor-not-allowed' }}"
+                            {{ !$peserta->nilai ? 'disabled' : '' }}
+                        >
+                            <span>Lihat Nilai</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    <!-- Modal untuk melihat nilai -->
+                        <div id="nilaiModal" class="hidden fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+                            <div class="bg-white p-6 rounded-md shadow-lg w-full max-w-md">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h2 class="text-lg font-semibold">Nilai Peserta</h2>
+                                    <button onclick="hideNilaiModal()" class="text-gray-500 hover:text-gray-700">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                @if ($nilai)
+            <div class="space-y-2">
+                <div class="grid grid-cols-2 gap-2">
+                    <p class="font-medium">Kehadiran:</p>
+                    <p>{{ $nilai->kehadiran ?? 'Tidak Ada' }}</p>
+                    <!-- Add other nilai fields similarly -->
+                </div>
+            </div>
+        @else
+            <p class="text-center py-4 text-gray-500">Nilai belum tersedia</p>
+        @endif
+        
+        <div class="mt-6 text-center">
+            <button onclick="hideNilaiModal()" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                Tutup
+            </button>
+        </div>
+    </div>
+</div>
                     </div>
                     <div class="p-3 rounded-md mb-1">
                         <div class="flex items-center">
@@ -232,6 +299,15 @@
             showConfirmButton: false
         });
     @endif
-</script>w
+    function showNilaiModal() {
+    document.getElementById('nilaiModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function hideNilaiModal() {
+    document.getElementById('nilaiModal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+</script>
 </body>
 </html>

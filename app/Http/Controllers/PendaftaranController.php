@@ -21,7 +21,7 @@ class PendaftaranController extends Controller
         ->whereHas('user')  
         ->where('status_pendaftaran', '!=', 'Belum Mendaftar') 
         ->orderBy('status_pendaftaran', $request->input('direction', 'asc'))
-        ->paginate(10);
+        ->get();
     
     $totalPendaftar = $pendaftarData->count();
 

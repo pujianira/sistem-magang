@@ -79,7 +79,7 @@
                                             <td class="py-2 px-3 text-sm border text-center">{{ $index + 1 }}</td>
                                             <td class="py-2 px-3 text-sm border">{{ $pendaftar->user->nama }}</td>
                                             <td class="py-2 px-3 text-sm border">{{ $pendaftar->universitas_sekolah }}</td>
-                                            <td class="py-2 px-3 text-sm border">{{ $pendaftar->durasi }}</td>
+                                            <td class="py-2 px-3 text-sm border">{{ $pendaftar->durasi }} bulan</td>
                                             <td class="py-2 px-3 text-sm border">{{ $pendaftar->nama_bidang }}</td>
                                             <td class="py-2 px-3 text-sm border">{{ $pendaftar->bulan_mulai }} {{ $pendaftar->tahun_mulai }}</td>
                                             <td class="py-2 px-3 text-sm border text-center">

@@ -29,15 +29,16 @@
 
                <!-- Profile Content -->
                <div class="bg-white rounded-lg shadow-md p-6">
-                   <!-- Profile Photo -->
-                   <div class="flex justify-center mb-8">
-                       <div class="w-24 h-24 bg-gray-500 rounded-full overflow-hidden">
-                           <img src="https://via.placeholder.com/150" 
-                                alt="Profile picture of John Doe" 
-                                class="w-full h-full object-cover">
-                       </div>
-                   </div>
-
+                    <div class="flex justify-center mb-8">
+                        <div class="w-24 h-24 bg-gray-500 rounded-lg overflow-hidden">
+                            <a href="{{ asset('storage/'.$pendaftar->user->foto) }}" target="_blank">
+                                <img src="{{ asset('storage/'.$pendaftar->user->foto) }}" 
+                                    alt="Profile picture" 
+                                    class="w-full h-full object-cover" 
+                                    id="preview">
+                            </a>
+                        </div>
+                    </div>
                    <!-- Profile Information -->
                    <div class="w-full md:w-3/3 mx-auto space-y-1">
                        <div class="p-3 rounded-md mb-1">
@@ -112,25 +113,49 @@
                                <p class="text-md text-gray-800 w-2/3">{{ $pendaftar->nama_bidang }}</p>
                            </div>
                        </div>
-                       <div class="p-3 rounded-md mb-1">
-                           <div class="flex items-center">
-                               <h4 class="text-base font-medium text-gray-500 w-1/3">Surat Permohonan</h4>
-                               <p class="text-md text-gray-800 w-2/3">Sistem Informasi</p>
-                           </div>
-                       </div>
-                       <div class="p-3 rounded-md mb-1">
-                           <div class="flex items-center">
-                               <h4 class="text-base font-medium text-gray-500 w-1/3">Proposal</h4>
-                               <p class="text-md text-gray-800 w-2/3">Maret 2025</p>
-                           </div>
-                       </div>
-                       <div class="p-3 rounded-md mb-1">
-                           <div class="flex items-center">
-                               <h4 class="text-base font-medium text-gray-500 w-1/3">Curriculum Vitae</h4>
-                               <p class="text-md text-gray-800 w-2/3">E-Government</p>
-                           </div>
-                       </div>
-                   </div>
+                        <div class="p-3 rounded-md mb-1">
+                            <div class="flex items-center">
+                                <h4 class="text-gray-500 font-medium w-1/3">Surat Permohonan</h4>
+                                <div class="w-2/3">
+                                    <button 
+                                        onclick="window.open('{{ asset('storage/'.$pendaftar->surat_permohonan) }}')" 
+                                        class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-md hover:bg-gray-50"
+                                    >
+                                        <span>Lihat Surat</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-md mb-1">
+                            <div class="flex items-center">
+                                <h4 class="text-base font-medium text-gray-500 w-1/3">Proposal</h4>
+                                    <div class="w-2/3">
+                                        <button 
+                                            onclick="window.open('{{ asset('storage/'.$pendaftar->proposal) }}')" 
+                                            class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-md hover:bg-gray-50"
+                                        >
+                                            <span>Lihat Proposal</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-md mb-1">
+                            <div class="flex items-center">
+                                <h4 class="text-base font-medium text-gray-500 w-1/3">Curriculum Vitae</h4>
+                                    <div class="w-2/3">
+                                        <button 
+                                            onclick="window.open('{{ asset('storage/'.$pendaftar->curriculum_vitae) }}')" 
+                                            class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-md hover:bg-gray-50"
+                                        >
+                                            <span>Lihat CV</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+
                    <!-- <div class="flex mt-10 justify-end">
                         <button onclick="konfirmasiSetuju('{{ route('terima.pendaftaran', $pendaftar->nim_nisn) }}')" 
                                 class="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-full mr-4 {{ $pendaftar->status_pendaftaran != 'Pending' ? 'opacity-50 cursor-not-allowed' : '' }}"

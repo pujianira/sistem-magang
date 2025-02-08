@@ -17,7 +17,7 @@ class PesertaController extends Controller
         $pesertaData = Pendaftar::with('user:id,nama,no_hp')
             ->where('status_pendaftaran', 'diterima')
             ->orderBy('status_kelulusan', $request->input('direction', 'asc'))
-            ->paginate(10);
+            ->get();
 
         $totalPeserta = $pesertaData->count();
 
@@ -51,9 +51,25 @@ class PesertaController extends Controller
         ->first();
         $user = $peserta->users;
         $pembina = $peserta->pembina;
+        $nilai = $peserta->nilai;
 
-        return view('pembina.infopeserta', compact('peserta', 'user', 'pembina'));
+        return view('pembina.infopeserta', compact('peserta', 'user', 'pembina', 'nilai'));
     }
+
+    // public function infoPeserta($nim_nisn)
+    // {
+    //     $peserta = Pendaftar::where('nim_nisn', $nim_nisn)
+    //         ->where('status_pendaftaran', 'diterima')
+    //         ->with(['user', 'pembina', 'nilai'])  // Eager load relationships
+    //         ->firstOrFail();
+            
+    //     return view('pembina.infopeserta', [
+    //         'peserta' => $peserta,
+    //         'user' => $peserta->user,
+    //         'pembina' => $peserta->pembina,
+    //         'nilai' => $peserta->nilai
+    //     ]);
+    // }
 
     public function setujuiKelulusan($nim_nisn)
     {
