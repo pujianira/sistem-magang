@@ -100,7 +100,7 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-header">
-            {{-- <h1 class="text-xl font-bold">MAGANG DISKOMINFO</h1> --}}
+            <h1 class="text-xl font-bold">Dinfo Magang</h1>
         </div>
         
         <a href="{{ route('profile.show') }}" class="profile-section {{ request()->routeIs('profile.show') ? 'active' : '' }}">

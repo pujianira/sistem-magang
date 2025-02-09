@@ -58,20 +58,24 @@ class ProfileController extends Controller
         ]);
 
         if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada
-            if ($user->foto && file_exists(public_path('img/profil/' . $user->foto))) {
-                unlink(public_path('img/profil/' . $user->foto));
+            if ($user->peran === 'Pendaftar') {
+                // Handling foto untuk Pendaftar
+                if ($user->foto && file_exists(storage_path('app/public/' . $user->foto))) {
+                    Storage::delete('public/' . $user->foto);
+                }
+                
+                $fotoPath = $request->file('foto')->store('foto-profil', 'public');
+                $user->foto = $fotoPath;
+            } else {
+                // Handling foto untuk Pembina dan Pembimbing
+                if ($user->foto && file_exists(public_path('img/profil/' . $user->foto))) {
+                    unlink(public_path('img/profil/' . $user->foto));
+                }
+        
+                $filename = time() . '.' . $request->foto->extension();
+                $request->foto->move(public_path('img/profil'), $filename);
+                $user->foto = $filename;
             }
-    
-            // Generate nama file unik
-            $filename = time() . '.' . $request->foto->extension();
-            
-            // Simpan file di folder public/img/profil
-            $request->foto->move(public_path('img/profil'), $filename);
-    
-            // Update path foto di database
-            $user->foto = $filename;
-            $user->save();
         }
 
         $user->fill($request->only('nama', 'email', 'no_hp', 'alamat'));

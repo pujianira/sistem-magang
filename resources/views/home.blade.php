@@ -34,32 +34,33 @@
                 <div class="owl-carousel owl-theme">
                     <div class="service-item">
                         <div class="icon"><i class="fas fa-university"></i></div>
-                        <h4>E-Government</h4>
+                        <h4>Sistem Pemerintahan Berbasis Elektronik</h4>
+                        <p>- Keamanan Informasi dan Persandian<br>- Pengembangan Aplikasi<br>- Tata Kelola Teknologi Informasi</p>
                     </div>
                     <div class="service-item">
                         <div class="icon"><i class="fas fa-lock"></i></div>
-                        <h4>Persandian & Keamanan</h4>
-                        <!-- <p>- Arsitektur Keamanan Informasi<br>- Manajemen Risiko</p> -->
+                        <h4>Pengelolaan Informasi dan Saluran Komunitas</h4>
+                        <p>- Pengelolaan Media<br>- Pengelolaan Aspirasi dan Informasi<br>- PPID, Keterbukaan Informasi Publik</p>
                     </div>
                     <div class="service-item">
                         <div class="icon"><i class="fas fa-rss"></i></div>
-                        <h4>Teknologi Informasi</h4>
-                        <!-- <p>- Monitoring Jaringan<br>- Instalasi Kabel LAN</p> -->
+                        <h4>Bidang Pengelolaan Infrastruktur</h4>
+                        <p>- Layanan Infrastruktur, Internet, dan Intranet<br>- Pengelolaan Saluran Informasi<br>- Pengelolaan TIK</p>
                     </div>
                     <div class="service-item">
                         <div class="icon"><i class="fas fa-chart-area"></i></div>
-                        <h4>Statistik</h4>
-                        <!-- <p>- Survei Kepuasan Masyarakat<br>- Pengelolaan Data Geospasial</p> -->
+                        <h4>Bidang Statistik</h4>
+                        <p>- Statistik Infrastruktur, Tata Ruang, dan Lingkungan<br>- Pengelolaan Statistik Sektoral dan Geospasial</p>
                     </div>
                     <div class="service-item">
                         <div class="icon"><i class="fas fa-bullhorn"></i></div>
-                        <h4>Informasi & Komunikasi Publik</h4>
-                        <!-- <p>- Monitoring Media<br>- Manajemen Kehumasan</p> -->
+                        <h4>Pengembangan Komunikasi Publik</h4>
+                        <p>- Penyusunan Strategi dan Pengawasan Komunikasi Publik<br>- Pengembangan SDM Komunitas TIK</p>
                     </div>
                     <div class="service-item">
                         <div class="icon"><i class="fas fa-users"></i></div>
                         <h4>Sekretariat</h4>
-                        <!-- <p>- Kepegawaian & Jabatan Fungsional<br>- Keterbukaan Informasi Publik</p> -->
+                        <p>- Sub Bagian Umum dan Kepegawaian<br>- Sub Bagian Keuangan dan Barang Milik Daerah</p>
                     </div>
                 </div>
             </div>
@@ -226,7 +227,7 @@
             border-radius: 10px;
             padding: 30px;
             margin: 15px;
-            min-height: 250px; 
+            min-height: 350px; 
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
@@ -255,9 +256,23 @@
         .services h2 {
             font-size: 2rem;
             font-weight: 700;
+            font-weight: bold;
             color: #022539;
         }
 
+        .services h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-weight: bold;
+            color: #022539;
+        }
+
+        .services p {
+            font-size: 1rem;
+            font-weight: 100;
+            color: #022539;
+            text-align: left;
+        }
 
         .owl-carousel .owl-nav {
             display: none;
