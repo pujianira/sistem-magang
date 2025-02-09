@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('nilai', function (Blueprint $table) {
-            $table->char('nim', 14)->primary();
+            $table->char('nim_nisn', 14)->primary();
             $table->integer('kehadiran')->nullable();
             $table->integer('ketepatanwaktu')->nullable(); 
             $table->integer('sikapkerja_prosedurkerja')->nullable();

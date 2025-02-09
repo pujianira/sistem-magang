@@ -8,6 +8,7 @@ use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\PesertaPembimbingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -58,9 +59,21 @@ Route::middleware(['auth', 'Pembina'])->group(function () {
 Route::middleware(['auth', 'Pembimbing'])->group(function () {
     // Route::get('/pembimbing/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/pembimbing/beranda', [HomeController::class, 'berandaPembimbing'])->name('beranda-Pembimbing'); 
-    Route::get('/pembimbing/pesertamagang', [PesertaController::class, 'daftarMentee'])->name('pesertamagang');
-    Route::get('/pembimbing/penilaian', [PenilaianController::class, 'index'])->name('penilaian');
-    Route::get('/pembina/filterBidangPeserta', [PesertaController::class, 'filterBidangPeserta'])->name('filter.bidangpeserta');
+    Route::get('/pembimbing/pesertamagang', [PesertaPembimbingController::class, 'daftarPeserta'])->name('pesertamagang-pembimbing');
+    Route::get('/pembimbing/infopeserta/{nim_nisn}', [PesertaPembimbingController::class, 'infoPeserta'])->name('infopeserta-pembimbing');
+    Route::post('/pembimbing/infopeserta/{nim_nisn}', [PesertaPembimbingController::class, 'storeNilai'])->name('penilaian');
+    // Route::get('/pembimbing/penilaian', [PenilaianController::class, 'index'])->name('penilaian');
+    // Route::get('/pembina/filterBidangPeserta', [PesertaPembimbingController::class, 'filterBidangPeserta'])->name('filter.bidangpeserta');
+
+    // Route::get('/pembina/pesertamagang', [PesertaController::class, 'daftarPeserta'])->name('pesertamagang');
+    // Route::get('/pembina/infopendaftar/{nim_nisn}', [PendaftaranController::class, 'infoPendaftar'])->name('infopendaftar');
+    // Route::get('/pembina/filterBidang', [PendaftaranController::class, 'filterBidang'])->name('filter.bidang');
+    // Route::get('/pembina/filterBidangPeserta', [PesertaController::class, 'filterBidangPeserta'])->name('filter.bidangpeserta');
+    // Route::post('/pembina/terima-pendaftaran/{nim_nisn}', [PendaftaranController::class, 'terimaPendaftaran'])->name('terima.pendaftaran');
+    // Route::post('/pembina/tolak-pendaftaran/{nim_nisn}', [PendaftaranController::class, 'tolakPendaftaran'])->name('tolak.pendaftaran');
+    // Route::get('/pembina/infopeserta/{nim_nisn}', [PesertaController::class, 'infoPeserta'])->name('infopeserta');
+    // Route::post('/pembina/setujui-kelulusan/{nim_nisn}', [PesertaController::class, 'setujuiKelulusan'])->name('setujui.kelulusan');
+    // Route::post('/pembina/tolak-kelulusan/{nim_nisn}', [PesertaController::class, 'tolakKelulusan'])->name('tolak.kelulusan');
 });
 
 //pendaftar

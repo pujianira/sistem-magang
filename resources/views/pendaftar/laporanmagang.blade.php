@@ -184,6 +184,38 @@
                             class="mt-6 inline-block bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600 transition duration-300 font-semibold shadow-md">
                                 🎓 Unduh Surat Kelulusan
                             </a>
+
+                            <div class="flex items-center">
+                                <h4 class="text-base font-medium text-gray-500 w-1/3">Nilai</h4>
+                                <button 
+                                    onclick="showNilaiModal()"
+                                    class="inline-flex items-center gap-2 px-4 py-2 border rounded-md transition 
+                                        {{ $pendaftar->nilai ? 'bg-white border-gray-200 hover:bg-gray-50' : 'bg-gray-200 text-gray-400 cursor-not-allowed' }}"
+                                    {{ !$pendaftar->nilai ? 'disabled' : '' }}
+                                >
+                                    <span>Lihat Nilai</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                                        <polyline points="7 7 17 7 17 17"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                            @if ($nilai)
+                                <div class="space-y-2">
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <p class="font-medium">Kehadiran:</p>
+                                        <p>{{ $nilai->kehadiran ?? 'Tidak Ada' }}</p>
+                                        <!-- Add other nilai fields similarly -->
+                                    </div>
+                                </div>
+                            @else
+                                <p class="text-center py-4 text-gray-500">Nilai belum tersedia</p>
+                            @endif   
+                            <div class="mt-6 text-center">
+                                <button onclick="hideNilaiModal()" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                                    Tutup
+                                </button>
+                            </div>
                     
                             <!-- Informasi Tambahan -->
                             <div class="mt-6">

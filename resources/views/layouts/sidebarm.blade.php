@@ -124,10 +124,6 @@
                 <i class="fas fa-users"></i>
                 <span>Peserta Magang</span>
             </a>
-            <a href="/pembimbing/penilaian" class="menu-item" id="penilaianLink">
-                <i class="fas fa-clipboard-list"></i>
-                <span>Penilaian</span>
-            </a>
             <a href="{{ route('login') }}" 
                 class="menu-item" 
                 id="logoutLink"
@@ -187,6 +183,38 @@
         menuItems.forEach(item => {
             const href = item.getAttribute('href');
             if (currentPath === href) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    function isPathMatch(currentPath, menuPath) {
+        // Untuk path /pembina/infopendaftar/{nim_nisn}
+        if (currentPath.startsWith('/pembimbing/infopendaftar/')) {
+            return menuPath === '/pembimbing/pendaftarmagang';
+        } 
+        else if (currentPath.startsWith('/pembimbing/infopeserta/')) {
+            return menuPath === '/pembimbing/pesertamagang';
+        } 
+        return currentPath === menuPath;
+    }
+    // Fungsi untuk mendapatkan path saat ini
+    function getCurrentPath() {
+        return window.location.pathname;
+    }
+
+    // Fungsi untuk mengatur menu aktif berdasarkan path
+    function setActiveMenu() {
+        const menuItems = document.querySelectorAll('.menu-item');
+        // Hapus semua class active terlebih dahulu
+        menuItems.forEach(item => item.classList.remove('active'));
+        
+        const currentPath = getCurrentPath();
+        
+        // Cari dan aktifkan menu yang sesuai dengan path saat ini
+        menuItems.forEach(item => {
+            const href = item.getAttribute('href');
+            if (isPathMatch(currentPath, href)) {
                 item.classList.add('active');
             }
         });

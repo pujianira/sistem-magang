@@ -27,7 +27,7 @@ class NilaiSeeder extends Seeder
 
         foreach ($nilaiData as $data) {
             Nilai::updateOrCreate(
-                ['nim' => $data[0]],
+                ['nim_nisn' => $data[0]],
                 [
                     'kehadiran' => $data[1],
                     'ketepatanwaktu' => $data[2],
