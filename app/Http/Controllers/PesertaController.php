@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pendaftar;
 use App\Models\Periode;
 use App\Models\Bidang;
+use App\Models\Nilai;
 
 class PesertaController extends Controller
 {
@@ -31,7 +32,7 @@ class PesertaController extends Controller
         
         $bidang = $request->input('bidang');
         
-        $pesertaData = Pendaftar::with('user:id,no_hp')
+        $pesertaData = Pendaftar::with('user:id,no_hp,nama')
             ->where('status_pendaftaran', 'Diterima');
         
         if ($bidang) {
@@ -47,29 +48,64 @@ class PesertaController extends Controller
     public function infoPeserta($nim_nisn)
     {
         $peserta = Pendaftar::where('nim_nisn', $nim_nisn)
-        ->where('status_pendaftaran', 'diterima')
-        ->first();
+            ->where('status_pendaftaran', 'diterima')
+            ->first();
         $user = $peserta->users;
         $pembina = $peserta->pembina;
-        $nilai = $peserta->nilai;
 
-        return view('pembina.infopeserta', compact('peserta', 'user', 'pembina', 'nilai'));
+        // Gunakan firstOrNew agar selalu ada objek nilai
+        $nilai = Nilai::firstOrNew(['nim_nisn' => $nim_nisn], [
+            'kehadiran' => 0,
+            'ketepatanwaktu' => 0,
+            'sikapkerja_prosedurkerja' => 0,
+            'kemampuanbekerjadlmtim' => 0,
+            'kreativitaskerja' => 0,
+            'inisiatifkerja' => 0,
+            'kemampuankomunikasi' => 0,
+            'kemampuanteknikal' => 0,
+            'kepercayaandiri' => 0,
+            'penampilan_kerapihan' => 0
+        ]);
+
+        $parameter_penilaian = [
+            'kehadiran' => 'Kehadiran',
+            'ketepatanwaktu' => 'Ketepatan Waktu',
+            'sikapkerja_prosedurkerja' => 'Sikap Kerja / Prosedur Kerja',
+            'kemampuanbekerjadlmtim' => 'Kemampuan Bekerja dalam Tim',
+            'kreativitaskerja' => 'Kreativitas Kerja',
+            'inisiatifkerja' => 'Inisiatif Kerja',
+            'kemampuankomunikasi' => 'Kemampuan Komunikasi',
+            'kemampuanteknikal' => 'Kemampuan Teknikal',
+            'kepercayaandiri' => 'Kepercayaan Diri',
+            'penampilan_kerapihan' => 'Penampilan & Kerapihan'
+        ];
+
+        $bobot = [
+            'kehadiran' => 5, 
+            'ketepatanwaktu' => 5, 
+            'sikapkerja_prosedurkerja' => 10, 
+            'kemampuanbekerjadlmtim' => 10,
+            'kreativitaskerja' => 10, 
+            'inisiatifkerja' => 15, 
+            'kemampuankomunikasi' => 15, 
+            'kemampuanteknikal' => 20,
+            'kepercayaandiri' => 5, 
+            'penampilan_kerapihan' => 5
+        ];
+
+        $total_nilai = (float)$nilai->kehadiran + 
+                    (float)$nilai->ketepatanwaktu + 
+                    (float)$nilai->sikapkerja_prosedurkerja + 
+                    (float)$nilai->kemampuanbekerjadlmtim + 
+                    (float)$nilai->kreativitaskerja + 
+                    (float)$nilai->inisiatifkerja + 
+                    (float)$nilai->kemampuankomunikasi + 
+                    (float)$nilai->kemampuanteknikal + 
+                    (float)$nilai->kepercayaandiri + 
+                    (float)$nilai->penampilan_kerapihan;
+
+        return view('pembina.infopeserta', compact('peserta', 'user', 'pembina', 'nilai', 'parameter_penilaian', 'bobot', 'total_nilai'));
     }
-
-    // public function infoPeserta($nim_nisn)
-    // {
-    //     $peserta = Pendaftar::where('nim_nisn', $nim_nisn)
-    //         ->where('status_pendaftaran', 'diterima')
-    //         ->with(['user', 'pembina', 'nilai'])  // Eager load relationships
-    //         ->firstOrFail();
-            
-    //     return view('pembina.infopeserta', [
-    //         'peserta' => $peserta,
-    //         'user' => $peserta->user,
-    //         'pembina' => $peserta->pembina,
-    //         'nilai' => $peserta->nilai
-    //     ]);
-    // }
 
     public function setujuiKelulusan($nim_nisn)
     {
@@ -77,7 +113,7 @@ class PesertaController extends Controller
             $peserta = Pendaftar::where('nim_nisn', $nim_nisn)->firstOrFail();
             
             // Cek apakah status peserta aktif
-            if ($peserta->status_kelulusan !== 'Aktif') {
+            if ($peserta->status_kelulusan !== 'Proses Pemeriksaan') {
                 return redirect()->back()->with('error', 'Hanya peserta dengan status Aktif yang dapat diubah status kelulusannya');
             }
 
@@ -99,7 +135,7 @@ class PesertaController extends Controller
             $peserta = Pendaftar::where('nim_nisn', $nim_nisn)->firstOrFail();
             
             // Cek apakah status peserta aktif
-            if ($peserta->status_kelulusan !== 'Aktif') {
+            if ($peserta->status_kelulusan !== 'Proses Pemeriksaan') {
                 return redirect()->back()->with('error', 'Hanya peserta dengan status Aktif yang dapat diubah status kelulusannya');
             }
 

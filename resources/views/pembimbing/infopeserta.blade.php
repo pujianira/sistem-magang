@@ -31,17 +31,18 @@
                <div class="bg-white rounded-lg shadow-md p-6">
                    <!-- Profile Photo -->
                    <div class="flex justify-center mb-8">
-                       <div class="w-24 h-24 bg-gray-500 rounded-lg overflow-hidden">
-                       <a href="{{ asset('storage/'.$peserta->user->foto) }}" target="_blank">
-                            <img src="{{ asset('storage/'.$peserta->user->foto) }}" 
+                        <div class="w-40 h-30 bg-gray-500 rounded-lg overflow-hidden relative group cursor-pointer" 
+                            onclick="openImageModal('{{ $peserta->user->foto ? asset('storage/'.$peserta->user->foto) : asset('img/default-avatar.jpg') }}')">
+                            <img src="{{ $peserta->user->foto ? asset('storage/'.$peserta->user->foto) : asset('img/default-avatar.jpg') }}" 
                                 alt="Profile picture" 
-                                class="w-full h-full object-cover" 
-                                id="preview"
-                            >
-                        </a>
-                       </div>
+                                class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                        </div>
                    </div>
-
                    <!-- Profile Information -->
                    <div class="w-full md:w-3/3 mx-auto space-y-1">
                        <div class="p-3 rounded-md mb-1">
@@ -143,7 +144,7 @@
                             <h4 class="text-base font-medium text-gray-500 w-1/3">Judul Laporan</h4>
                             <p class="text-md w-2/3 
                                 @if (!$peserta->judul_laporan) italic text-gray-500 @else text-gray-800 @endif">
-                                {{ $peserta->judul_laporan ?? 'Laporan belum dikirim' }}
+                                {{ $peserta->judul_laporan ?? 'Laporan belum diunggah' }}
                             </p>
                         </div>
                     </div>
@@ -152,7 +153,7 @@
                             <h4 class="text-base font-medium text-gray-500 w-1/3">Jenis Karya</h4>
                             <p class="text-md w-2/3 
                                 @if (!$peserta->jenis_karya) italic text-gray-500 @else text-gray-800 @endif">
-                                {{ $peserta->jenis_karya ?? 'Laporan belum dikirim' }}
+                                {{ $peserta->jenis_karya ?? 'Laporan belum diunggah' }}
                             </p>
                         </div>
                     </div>
@@ -161,7 +162,7 @@
                             <h4 class="text-base font-medium text-gray-500 w-1/3">Deskripsi Karya</h4>
                             <p class="text-md w-2/3 
                                 @if (!$peserta->deskripsi_karya) italic text-gray-500 @else text-gray-800 @endif">
-                                {{ $peserta->deskripsi_karya ?? 'Laporan belum dikirim' }}
+                                {{ $peserta->deskripsi_karya ?? 'Laporan belum diunggah' }}
                             </p>
                         </div>
                     </div>
@@ -335,6 +336,18 @@
            </div>
        </div>
    </div>
+   <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="relative bg-white p-4 rounded-lg" style="max-width: 300px;">
+            <!-- Tombol Close -->
+            <div class="relative">
+                <button type="button" onclick="closeImageModal()" class="absolute top-0 right-0 p-2 text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        <img id="modalImage" src="" alt="Preview" class="w-full h-auto object-contain rounded">
+   </div>
    <script>
     // function konfirmasiSetujuKelulusan(url) {
     //     Swal.fire({
@@ -454,6 +467,28 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+function openImageModal(imageSrc) {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        modalImage.src = imageSrc;
+        modal.style.display = 'flex';
+
+        // Mencegah scrolling pada background
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal() {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = 'none';
+        
+        // Mengembalikan scrolling
+        document.body.style.overflow = 'auto';
+    }
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeImageModal();
+        }
+    });
 </script>
 </body>
 </html>

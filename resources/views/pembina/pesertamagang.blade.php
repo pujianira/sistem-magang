@@ -89,6 +89,11 @@
                                                             Aktif
                                                         </span>
                                                         @break
+                                                    @case('Proses Pemeriksaan')
+                                                        <span class="items-center bg-green-100 text-blue-800 px-2 py-1 rounded">
+                                                            Mengunggah Laporan
+                                                        </span>
+                                                        @break
                                                     @case('Lulus')
                                                         <span class="items-center bg-green-100 text-yellow-800 px-2 py-1 rounded">
                                                             Lulus

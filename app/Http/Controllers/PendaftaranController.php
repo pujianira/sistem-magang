@@ -12,29 +12,21 @@ use Illuminate\Support\Facades\Log;
 class PendaftaranController extends Controller
 {
     public function pendaftar(Request $request)
-{
-    $user = auth()->user(); 
-    $bidangs = Bidang::all();
-    
-    $pendaftarData = Pendaftar::with('user:id,nama') 
-        ->select('nim_nisn', 'universitas_sekolah', 'jurusan', 'nama_bidang', 'status_pendaftaran', 'status_kelulusan', 'user_id')
-        ->whereHas('user')  
-        ->where('status_pendaftaran', '!=', 'Belum Mendaftar') 
-        ->orderBy('status_pendaftaran', $request->input('direction', 'asc'))
-        ->get();
-    
-    $totalPendaftar = $pendaftarData->count();
+    {
+        $user = auth()->user(); 
+        $bidangs = Bidang::all();
+        
+        $pendaftarData = Pendaftar::with('user:id,nama') 
+            ->select('nim_nisn', 'universitas_sekolah', 'jurusan', 'nama_bidang', 'status_pendaftaran', 'status_kelulusan', 'user_id')
+            ->whereHas('user')  
+            ->where('status_pendaftaran', '!=', 'Belum Mendaftar') 
+            ->orderBy('status_pendaftaran', $request->input('direction', 'asc'))
+            ->get();
+        
+        $totalPendaftar = $pendaftarData->count();
 
-    return view('pembina.pendaftarmagang', compact('user', 'bidangs', 'pendaftarData', 'totalPendaftar'));
-}
-
-    // public function daftarMagang() 
-    // {
-    //     $user = auth()->user(); 
-    //     $bidangs = Bidang::all();
-    //     $periodes = Periode::all();
-    //     return view('pendaftar.daftarmagang', compact('user', 'bidangs', 'periodes'));
-    // }
+        return view('pembina.pendaftarmagang', compact('user', 'bidangs', 'pendaftarData', 'totalPendaftar'));
+    }
 
     public function filterBidang(Request $request)
     {

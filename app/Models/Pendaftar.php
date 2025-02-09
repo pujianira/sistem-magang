@@ -37,6 +37,6 @@ class Pendaftar extends Model
 
     public function nilai()
     {
-        return $this->belongsTo(Pendaftar::class, 'nim', 'nim_nisn');
+        return $this->hasOne(Pendaftar::class, 'nim_nisn', 'nim_nisn');
     }
 }

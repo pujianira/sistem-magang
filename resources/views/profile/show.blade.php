@@ -17,12 +17,21 @@
         @endif
         <div class="flex-1 p-6 overflow-y-auto">
             <h1 class="text-2xl font-bold mb-8">Profil</h1>
+            @if($user->peran === 'Pendaftar')
+            <div class="flex justify-center mb-6">
+            <img src="{{ Auth::user()->foto && file_exists(storage_path('app/public/' . Auth::user()->foto))
+                ? asset('storage/' . Auth::user()->foto)
+                : asset('img/pasfoto.jpg') }}"
+                alt="Foto Profil" 
+                class="w-40 h-30 border object-cover rounded-lg">
+            </div>
+            @else
             <div class="flex justify-center mb-6">
                 <img src="{{ $user->foto ? asset('img/profil/' . $user->foto) : asset('img/pasfoto.jpg') }}" 
                     alt="fotoprofil" 
-                    class="w-40 h-40 border object-cover rounded-lg">
+                    class="w-40 h-30 border object-cover rounded-lg">
             </div>
-
+            @endif
             <div class="flex justify-end mt-4 mb-4">
                 <a href="{{ route('profile.edit') }}" class="py-2 px-4 border border-transparent shadow-sm text-sm font-bold rounded-md text-white bg-[#FB991A] hover:bg-orange-600 transition duration-300">
                     Edit Profil

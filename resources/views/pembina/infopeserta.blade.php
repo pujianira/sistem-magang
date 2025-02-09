@@ -31,16 +31,18 @@
                <div class="bg-white rounded-lg shadow-md p-6">
                    <!-- Profile Photo -->
                    <div class="flex justify-center mb-8">
-                       <div class="w-24 h-24 bg-gray-500 rounded-lg overflow-hidden">
-                       <a href="{{ asset('storage/'.$peserta->user->foto) }}" target="_blank">
-                            <img src="{{ asset('storage/'.$peserta->user->foto) }}" 
+                        <div class="w-40 h-30 bg-gray-500 rounded-lg overflow-hidden relative group cursor-pointer" 
+                            onclick="openImageModal('{{ $peserta->user->foto ? asset('storage/'.$peserta->user->foto) : asset('img/default-avatar.jpg') }}')">
+                            <img src="{{ $peserta->user->foto ? asset('storage/'.$peserta->user->foto) : asset('img/default-avatar.jpg') }}" 
                                 alt="Profile picture" 
-                                class="w-full h-full object-cover" 
-                                id="preview">
-                        </a>
-                       </div>
+                                class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                        </div>
                    </div>
-
                    <!-- Profile Information -->
                    <div class="w-full md:w-3/3 mx-auto space-y-1">
                        <div class="p-3 rounded-md mb-1">
@@ -100,7 +102,7 @@
                             <h4 class="text-base font-medium text-gray-500 w-1/3">Judul Laporan</h4>
                             <p class="text-md w-2/3 
                                 @if (!$peserta->judul_laporan) italic text-gray-500 @else text-gray-800 @endif">
-                                {{ $peserta->judul_laporan ?? 'Laporan belum dikirim' }}
+                                {{ $peserta->judul_laporan ?? 'Laporan belum diunggah' }}
                             </p>
                         </div>
                     </div>
@@ -109,7 +111,7 @@
                             <h4 class="text-base font-medium text-gray-500 w-1/3">Jenis Karya</h4>
                             <p class="text-md w-2/3 
                                 @if (!$peserta->jenis_karya) italic text-gray-500 @else text-gray-800 @endif">
-                                {{ $peserta->jenis_karya ?? 'Laporan belum dikirim' }}
+                                {{ $peserta->jenis_karya ?? 'Laporan belum diunggah' }}
                             </p>
                         </div>
                     </div>
@@ -118,7 +120,7 @@
                             <h4 class="text-base font-medium text-gray-500 w-1/3">Deskripsi Karya</h4>
                             <p class="text-md w-2/3 
                                 @if (!$peserta->deskripsi_karya) italic text-gray-500 @else text-gray-800 @endif">
-                                {{ $peserta->deskripsi_karya ?? 'Laporan belum dikirim' }}
+                                {{ $peserta->deskripsi_karya ?? 'Laporan belum diunggah' }}
                             </p>
                         </div>
                     </div>
@@ -143,51 +145,69 @@
                         </div>
                     </div>
                     <div class="p-3 rounded-md mb-1">
-                    <div class="flex items-center">
-                        <h4 class="text-base font-medium text-gray-500 w-1/3">Nilai</h4>
-                        <button 
-                            onclick="showNilaiModal()"
-                            class="inline-flex items-center gap-2 px-4 py-2 border rounded-md transition 
-                                {{ $peserta->nilai ? 'bg-white border-gray-200 hover:bg-gray-50' : 'bg-gray-200 text-gray-400 cursor-not-allowed' }}"
-                            {{ !$peserta->nilai ? 'disabled' : '' }}
-                        >
-                            <span>Lihat Nilai</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
-                        </button>
-                    </div>
-                    <!-- Modal untuk melihat nilai -->
+                        <div class="flex items-center">
+                            <h4 class="text-base font-medium text-gray-500 w-1/3">Nilai</h4>
+                            <button 
+                                type="button" 
+                                onclick="showNilaiModal()"
+                                class="inline-flex items-center gap-2 px-4 py-2 border rounded-md transition 
+                                {{ $nilai && $nilai->exists ? 'bg-white border-gray-200 hover:bg-gray-50' : 'bg-gray-200 text-gray-400 cursor-not-allowed' }}"
+                                {{ !$nilai || !$nilai->exists ? 'disabled' : '' }}
+                            >
+                                <span>Lihat Nilai</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                        <!-- Modal untuk melihat nilai -->
                         <div id="nilaiModal" class="hidden fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-                            <div class="bg-white p-6 rounded-md shadow-lg w-full max-w-md">
+                        <div class="bg-white p-6 rounded-md shadow-lg w-[80%] max-w-4xl max-h-[90vh]">
+                                <!-- Header Modal -->
                                 <div class="flex justify-between items-center mb-4">
-                                    <h2 class="text-lg font-semibold">Nilai Peserta</h2>
-                                    <button onclick="hideNilaiModal()" class="text-gray-500 hover:text-gray-700">
+                                    <h1 class="text-lg font-bold">Nilai Peserta</h1>
+                                    <button type="button" onclick="hideNilaiModal()" class="text-gray-500 hover:text-gray-700">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                                         </svg>
                                     </button>
                                 </div>
-                                @if ($nilai)
-            <div class="space-y-2">
-                <div class="grid grid-cols-2 gap-2">
-                    <p class="font-medium">Kehadiran:</p>
-                    <p>{{ $nilai->kehadiran ?? 'Tidak Ada' }}</p>
-                    <!-- Add other nilai fields similarly -->
-                </div>
-            </div>
-        @else
-            <p class="text-center py-4 text-gray-500">Nilai belum tersedia</p>
-        @endif
-        
-        <div class="mt-6 text-center">
-            <button onclick="hideNilaiModal()" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                Tutup
-            </button>
-        </div>
-    </div>
-</div>
+                                <!-- Isi Modal -->
+                                <!-- <h1 class="text-lg font-bold mb-2">Penilaian Peserta</h1> -->
+                                    <table class="mt-4 w-full table-auto border-collapse border border-gray-300 text-sm">
+                                        <thead>
+                                            <tr class="bg-blue-900 text-white">
+                                                <th class="border px-4 py-2 text-left">No</th>
+                                                <th class="border px-4 py-2 text-left">Parameter Penilaian</th>
+                                                <th class="border px-4 py-2">Bobot</th>
+                                                <th class="border px-4 py-2">Nilai</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php $no = 1; @endphp
+                                            @foreach($parameter_penilaian as $key => $value)
+                                            <tr class="odd:bg-gray-100 even:bg-gray-200">
+                                                <td class="border px-4 py-2">{{ $no++ }}</td>
+                                                <td class="border px-6 py-2">{{ $value }}</td>
+                                                <td class="border px-4 py-2 text-center">{{ $bobot[$key] }}</td>
+                                                <td class="border px-4 py-2 text-center">
+                                                    {{ $nilai->$key ?? '-' }}
+                                                </td>
+                                            </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="bg-yellow-100">
+                                                <td colspan="2" class="border px-4 py-2 font-semibold">Total</td>
+                                                <td class="border px-4 py-2 text-center" id="total-bobot">{{ array_sum($bobot) }}</td>
+                                                <td class="border px-4 py-2 text-center" id="total-nilai">{{ $total_nilai }}</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>                        
+                            </div>
+                        </div>
                     </div>
                     <div class="p-3 rounded-md mb-1">
                         <div class="flex items-center">
@@ -196,6 +216,8 @@
                                 <p class="text-md text-gray-600 font-bold inline-block bg-gray-100 px-2 py-1 rounded">Belum Mendaftar</p>
                             @elseif($peserta->status_kelulusan == 'Aktif')
                                 <p class="text-md text-yellow-800 font-bold inline-block bg-yellow-100 px-2 py-1 rounded">Aktif</p>
+                            @elseif($peserta->status_kelulusan == 'Proses Pemeriksaan')
+                                <p class="text-md text-blue-800 font-bold inline-block bg-green-100 px-2 py-1 rounded">Telah Mengumpulkan Laporan</p>
                             @elseif($peserta->status_kelulusan == 'Lulus')
                                 <p class="text-md text-green-800 font-bold inline-block bg-green-100 px-2 py-1 rounded">Lulus</p>
                             @elseif($peserta->status_kelulusan == 'Tidak Lulus')
@@ -207,20 +229,32 @@
                     </div>
                     <div class="flex justify-end gap-4"> <!-- Tambahkan gap-4 untuk spacing antar button -->
                         <button onclick="konfirmasiSetujuKelulusan('{{ route('setujui.kelulusan', $peserta->nim_nisn) }}')" 
-                                class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition duration-300 font-bold @if($peserta->status_kelulusan != 'Aktif') opacity-50 cursor-not-allowed @endif"
-                                @if($peserta->status_kelulusan != 'Aktif') disabled @endif>
+                                class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition duration-300 font-bold @if($peserta->status_kelulusan != 'Proses Pemeriksaan') opacity-50 cursor-not-allowed @endif"
+                                @if($peserta->status_kelulusan != 'Proses Pemeriksaan') disabled @endif>
                             Setujui Kelulusan
                         </button>
                         
                         <button onclick="konfirmasiTolakKelulusan('{{ route('tolak.kelulusan', $peserta->nim_nisn) }}')" 
-                                class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition duration-300 font-bold @if($peserta->status_kelulusan != 'Aktif') opacity-50 cursor-not-allowed @endif"
-                                @if($peserta->status_kelulusan != 'Aktif') disabled @endif>
+                                class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition duration-300 font-bold @if($peserta->status_kelulusan != 'Proses Pemeriksaan') opacity-50 cursor-not-allowed @endif"
+                                @if($peserta->status_kelulusan != 'Proses Pemeriksaan') disabled @endif>
                             Tolak Kelulusan
                         </button>
                     </div>
                 </div>
            </div>
        </div>
+   </div>
+   <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="relative bg-white p-4 rounded-lg" style="max-width: 300px;">
+            <!-- Tombol Close -->
+            <div class="relative">
+                <button type="button" onclick="closeImageModal()" class="absolute top-0 right-0 p-2 text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        <img id="modalImage" src="" alt="Preview" class="w-full h-auto object-contain rounded">
    </div>
    <script>
     function konfirmasiSetujuKelulusan(url) {
@@ -300,14 +334,37 @@
         });
     @endif
     function showNilaiModal() {
-    document.getElementById('nilaiModal').classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-}
+        document.getElementById('nilaiModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
 
-function hideNilaiModal() {
-    document.getElementById('nilaiModal').classList.add('hidden');
-    document.body.style.overflow = 'auto';
-}
+    function hideNilaiModal() {
+        document.getElementById('nilaiModal').classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+
+    function openImageModal(imageSrc) {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        modalImage.src = imageSrc;
+        modal.style.display = 'flex';
+
+        // Mencegah scrolling pada background
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal() {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = 'none';
+        
+        // Mengembalikan scrolling
+        document.body.style.overflow = 'auto';
+    }
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeImageModal();
+        }
+    });
 </script>
 </body>
 </html>

@@ -19,11 +19,19 @@
         <!-- Foto Profil -->
         <div class="flex justify-center mb-6">
             <div class="relative">
+                @if($user->peran === 'Pendaftar')
+                <img id="preview" 
+                src="{{ Auth::user()->foto && file_exists(storage_path('app/public/' . Auth::user()->foto))
+                ? asset('storage/' . Auth::user()->foto)
+                : asset('img/pasfoto.jpg') }}"
+                    alt="fotoprofil" 
+                    class="w-40 h-40 border object-cover rounded-lg">
+                @else
                 <img id="preview" 
                     src="{{ $user->foto ? asset('img/profil/' . $user->foto) : asset('img/pasfoto.jpg') }}" 
                     alt="fotoprofil" 
                     class="w-40 h-40 border object-cover rounded-lg">
-                
+                @endif
                 <input type="file" 
                     name="foto" 
                     id="foto" 

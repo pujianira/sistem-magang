@@ -99,14 +99,16 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-header">
-            <h1 class="text-xl font-bold">DinfoMagang</h1>
+            <h1 class="text-xl font-bold">Dinfo Magang</h1>
         </div>
         
         <a href="{{ route('profile.show') }}" class="profile-section {{ request()->routeIs('profile.show') ? 'active' : '' }}">
             <div class="profile-image">
-                <img src="{{ Auth::user()->foto ? asset('uploads/foto/' . Auth::user()->foto) : asset('img/pasfoto.jpg') }}" 
-                    alt="Foto Profil" 
-                    class="w-full h-full object-cover rounded-full">
+            <img src="{{ Auth::user()->foto && file_exists(storage_path('app/public/' . Auth::user()->foto))
+                ? asset('storage/' . Auth::user()->foto)
+                : asset('img/pasfoto.jpg') }}"
+                alt="Foto Profil" 
+                class="w-full h-full object-cover rounded-full">
             </div>
             <div class="profile-info">
                 <p class="mb-1">{{ $user->nama }}</p>

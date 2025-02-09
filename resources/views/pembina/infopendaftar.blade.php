@@ -30,13 +30,16 @@
                <!-- Profile Content -->
                <div class="bg-white rounded-lg shadow-md p-6">
                     <div class="flex justify-center mb-8">
-                        <div class="w-24 h-24 bg-gray-500 rounded-lg overflow-hidden">
-                            <a href="{{ asset('storage/'.$pendaftar->user->foto) }}" target="_blank">
-                                <img src="{{ asset('storage/'.$pendaftar->user->foto) }}" 
-                                    alt="Profile picture" 
-                                    class="w-full h-full object-cover" 
-                                    id="preview">
-                            </a>
+                        <div class="w-40 h-30 bg-gray-500 rounded-lg overflow-hidden relative group cursor-pointer" 
+                            onclick="openImageModal('{{ $pendaftar->user->foto ? asset('storage/'.$pendaftar->user->foto) : asset('img/default-avatar.jpg') }}')">
+                            <img src="{{ $pendaftar->user->foto ? asset('storage/'.$pendaftar->user->foto) : asset('img/default-avatar.jpg') }}" 
+                                alt="Profile picture" 
+                                class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                    <!-- Profile Information -->
@@ -155,43 +158,6 @@
                                     </div>
                             </div>
                         </div>
-
-                   <!-- <div class="flex mt-10 justify-end">
-                        <button onclick="konfirmasiSetuju('{{ route('terima.pendaftaran', $pendaftar->nim_nisn) }}')" 
-                                class="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-full mr-4 {{ $pendaftar->status_pendaftaran != 'Pending' ? 'opacity-50 cursor-not-allowed' : '' }}"
-                                {{ $pendaftar->status_pendaftaran != 'Pending' ? 'disabled' : '' }}>
-                            Terima Pengajuan
-                        </button>
-                        
-                        <button onclick="konfirmasiTolak('{{ route('tolak.pendaftaran', $pendaftar->nim_nisn) }}')" 
-                                class="bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-full {{ $pendaftar->status_pendaftaran != 'Pending' ? 'opacity-50 cursor-not-allowed' : '' }}"
-                                {{ $pendaftar->status_pendaftaran != 'Pending' ? 'disabled' : '' }}>
-                            Tolak Pengajuan
-                        </button>
-                    </div> -->
-                    <!-- <div class="flex mt-10 justify-end">
-                        @if ($pendaftar->status_pendaftaran == 'Pending')
-                            <button onclick="konfirmasiSetuju('{{ route('terima.pendaftaran', $pendaftar->nim_nisn) }}')" 
-                                    class="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-full mr-4">
-                                Terima Pengajuan
-                            </button>
-                            
-                            <button onclick="konfirmasiTolak('{{ route('tolak.pendaftaran', $pendaftar->nim_nisn) }}')" 
-                                    class="bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-full">
-                                Tolak Pengajuan
-                            </button>
-                        @else
-                            <button disabled 
-                                    class="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-full mr-4 opacity-50 cursor-not-allowed">
-                                Terima Pengajuan
-                            </button>
-                            
-                            <button disabled
-                                    class="bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-full opacity-50 cursor-not-allowed">
-                                Tolak Pengajuan
-                            </button>
-                        @endif
-                    </div> -->
                     <div class="flex mt-10 justify-end">
                         <button onclick="konfirmasiSetuju('{{ route('terima.pendaftaran', $pendaftar->nim_nisn) }}')" 
                                 class="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-full mr-4 @if($pendaftar->status_pendaftaran != 'Menunggu') opacity-50 cursor-not-allowed @endif"
@@ -209,6 +175,19 @@
            </div>
        </div>
    </div>
+   <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="relative bg-white p-4 rounded-lg" style="max-width: 300px;">
+            <!-- Tombol Close -->
+            <div class="relative">
+                <button type="button" onclick="closeImageModal()" class="absolute top-0 right-0 p-2 text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        <img id="modalImage" src="" alt="Preview" class="w-full h-auto object-contain rounded">
+   </div>
+</div>
 
    <!-- Scripts -->
    <script>
@@ -288,6 +267,29 @@
                showConfirmButton: false
            });
        @endif
+
+       function openImageModal(imageSrc) {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        modalImage.src = imageSrc;
+        modal.style.display = 'flex';
+
+        // Mencegah scrolling pada background
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal() {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = 'none';
+        
+        // Mengembalikan scrolling
+        document.body.style.overflow = 'auto';
+    }
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeImageModal();
+        }
+    });
    </script>
 </body>
 </html>
