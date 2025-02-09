@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Pendaftar;
 
 class RegisteredUserController extends Controller
 {
@@ -30,21 +31,30 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'nim_nisn' => ['required', 'string', 'max:14', 'unique:pendaftar,nim_nisn']
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'nama' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'peran' => 'Pendaftar',
+        ]);
+
+        Pendaftar::create([
+            'nim_nisn' => $request->nim_nisn,
+            'user_id' => $user->id,
+            'status_pendaftaran' => 'Belum Mendaftar',
+            'status_kelulusan' => 'Belum Mendaftar',
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('beranda-Pendaftar', absolute: false));
     }
 }

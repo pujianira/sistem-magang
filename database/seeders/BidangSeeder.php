@@ -13,12 +13,12 @@ class BidangSeeder extends Seeder
     public function run(): void
     {
         $bidangData = [
-            ['BID1', 'Teknologi Informasi dan Komunikasi'],
-            ['BID2', 'Statistik'],
-            ['BID3', 'Informasi dan Komunikasi Publik'],
-            ['BID4', 'E-Government'],
-            ['BID5', 'Persandian dan Keamanan Informasi'],
-            ['BID6', 'Sekretariat'],
+            ['BID1', 'Sekretariat'],
+            ['BID2', 'Pengembangan Komunikasi Publik'],
+            ['BID3', 'Sistem Pemerintahan Berbasis Elektronik'],
+            ['BID4', 'Pengelolaan Informasi dan Saluran Komunikasi Publik'],
+            ['BID5', 'Pengelolaan Infrastruktur'],
+            ['BID6', 'Statistik'],
         ];
 
         foreach ($bidangData as $data) {

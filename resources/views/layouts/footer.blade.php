@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .footer {
-            background-color: #f5f5f5;
+            background-color: #022539;
             padding: 20px 0;
             text-align: center;
             font-size: 14px;
@@ -19,8 +19,8 @@
     </style>
 </head>
 <body>
-<footer class="bg-gray-100 py-6 mt-auto">
-    <div class="container mx-auto text-center text-gray-600 text-sm">
+<footer class="bg-[#022539] py-6 mt-auto">
+    <div class="container mx-auto text-center text-white text-sm">
         ©2025 Dinas Komunikasi, Informatika, Statistik dan Persandian Kota Semarang.
     </div>
 </footer>

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('periode', function (Blueprint $table) {
+            $table->string('id_periode', 10)->primary();
             $table->string('bulan', 20);
             $table->integer('tahun');
-            $table->integer('kuota_pendaftar');
         });
     }
 

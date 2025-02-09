@@ -23,8 +23,8 @@ class PembimbingSeeder extends Seeder
                 'nohp' => '081245471022',
                 'alamat' => 'Jalan Anggrek Nomor 4',
                 'nip' => '199012021643029081',
-                'nama_bidang' => 'Informasi dan Komunikasi Publik', 
-                'id_bidang' => 'BID3', 
+                'nama_bidang' => 'Pengelolaan Informasi dan Saluran Komunikasi Publik', 
+                'id_bidang' => 'BID4', 
                 'kuota_pendaftar' => 20,
             ],
             [
@@ -34,8 +34,8 @@ class PembimbingSeeder extends Seeder
                 'nohp' => '082135112735',
                 'alamat' => 'Jalan Kenanga Nomor 1',
                 'nip' => '199703101243112031',
-                'nama_bidang' => 'E-Government', 
-                'id_bidang' => 'BID4', 
+                'nama_bidang' => 'Sistem Pemerintahan Berbasis Elektronik', 
+                'id_bidang' => 'BID3', 
                 'kuota_pendaftar' => 20,
             ],
         ];

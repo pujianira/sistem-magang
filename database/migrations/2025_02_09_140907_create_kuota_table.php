@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pembimbing', function (Blueprint $table) {
-            $table->char('nip', 18)->primary();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('nama_bidang', 100);
-            $table->string('id_bidang', 10);
+        Schema::create('kuota', function (Blueprint $table) {
+            $table->string('id_bidang');
             $table->foreign('id_bidang')->references('id_bidang')->on('bidang')->onDelete('cascade');
+            $table->string('id_periode');
+            $table->foreign('id_periode')->references('id_periode')->on('periode')->onDelete('cascade');
             $table->integer('kuota_pendaftar');
+
+            $table->primary(['id_bidang', 'id_periode']);
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pembimbing');
+        Schema::dropIfExists('kuota');
     }
 };

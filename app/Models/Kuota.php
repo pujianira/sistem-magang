@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Periode extends Model
 {
-    protected $table = 'periode';
+    protected $table = 'kuota';
 
-    protected $fillable = ['id_periode', 'bulan', 'tahun'];
+    protected $primaryKey = ['id_bidang', 'id_periode']; 
+    public $incrementing = false;
+
+    protected $fillable = ['id_bidang', 'id_periode', 'bulan', 'tahun'];
     
     public function pembimbing()
     {

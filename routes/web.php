@@ -81,6 +81,7 @@ Route::middleware(['auth', 'Pendaftar'])->group(function () {
     // Route::get('/pendaftar/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/pendaftar/beranda', [HomeController::class, 'berandaPendaftar'])->name('beranda-Pendaftar'); 
     Route::get('/pendaftar/daftarmagang', [DaftarMagangController::class, 'daftarMagang'])->name('daftarmagang'); 
+    Route::get('/getPeriodeByBidang', [PendaftaranController::class, 'getPeriodeByBidang'])->name('getPeriodeByBidang');
     Route::post('/pendaftar/daftarmagang', [DaftarMagangController::class, 'store'])->name('pendaftaran.store');
     Route::get('/view-file/{filename}', [DaftarMagangController::class, 'viewFile'])->name('view-file');
     Route::get('/surat-penerimaan', [DaftarMagangController::class, 'cetakSuratPenerimaan'])->name('cetaksuratpenerimaan');

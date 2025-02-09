@@ -185,7 +185,7 @@
                                 🎓 Unduh Surat Kelulusan
                             </a>
 
-                            <div class="flex items-center">
+                            {{-- <div class="flex items-center">
                                 <h4 class="text-base font-medium text-gray-500 w-1/3">Nilai</h4>
                                 <button 
                                     onclick="showNilaiModal()"
@@ -215,7 +215,7 @@
                                 <button onclick="hideNilaiModal()" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
                                     Tutup
                                 </button>
-                            </div>
+                            </div> --}}
                     
                             <!-- Informasi Tambahan -->
                             <div class="mt-6">

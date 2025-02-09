@@ -22,19 +22,24 @@
             z-index: 1000;
         }
 
-        .header.scrolled {
+        /* .header.scrolled {
             background-color: white; 
             color: #022539; 
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
-        }
+        } */
+        /* .header.scrolled {
+            background-color: #022539; 
+            color: white; 
+            box-shadow: none; 
+        } */
 
-        .header.scrolled a {
+        /* .header.scrolled a {
             color: #022539; 
         }
 
         .header.scrolled a:hover {
             color: #F97316; 
-        }
+        } */
 
         .logo-container {
             display: flex;

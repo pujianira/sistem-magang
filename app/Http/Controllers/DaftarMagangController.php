@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class DaftarMagangController extends Controller
 {
@@ -158,12 +159,15 @@ class DaftarMagangController extends Controller
             'nama' => $user->nama, 
             'nim' => $pendaftar->nim_nisn,
             'bidang' => $pendaftar->nama_bidang,
-            'tanggal' => now()->locale('id')->isoFormat('D MMMM Y')
+            'tanggal' => now()->locale('id')->isoFormat('D MMMM Y'),
+            'universitas_sekolah' => $pendaftar->universitas_sekolah,
+            'bulan_mulai' => $pendaftar->bulan_mulai,
+            'tahun_mulai' => $pendaftar->tahun_mulai
         ];
 
         $pdf = PDF::loadView('pendaftar.suratpenerimaan-pendaftar', $data);
 
-        return $pdf->download('Surat_Kelulusan_Penerimaan.pdf');
+        return $pdf->download('Surat_Penerimaan_Magang.pdf');
     }
 
     public function viewFile($filename)
@@ -176,4 +180,18 @@ class DaftarMagangController extends Controller
 
         return response()->file($path);
     }
+
+    public function getPeriodeByBidang(Request $request)
+    {
+        $id_bidang = $request->id_bidang;
+
+        $periode = DB::table('kuota')
+            ->join('periode', 'kuota.id_periode', '=', 'periode.id_periode')
+            ->where('kuota.id_bidang', $id_bidang)
+            ->select('periode.id_periode', 'periode.bulan', 'periode.tahun', DB::raw('(kuota.kuota_pendaftar - COALESCE((SELECT COUNT(*) FROM pendaftar WHERE pendaftar.id_periode = periode.id_periode AND pendaftar.id_bidang = kuota.id_bidang), 0)) as sisa_kuota'))
+            ->get();
+
+        return response()->json($periode);
+    }
+
 }
