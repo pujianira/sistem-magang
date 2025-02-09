@@ -64,7 +64,7 @@ class PendaftarSeeder extends Seeder
                 'tahun_mulai' => 2025, 
                 'durasi' => '3',
                 'id_bidang' => 'BID3', 
-                'nama_bidang' => 'Informasi dan Komunikasi Publik', 
+                'nama_bidang' => 'Bidang Sistem Pemerintahan Berbasis Elektronik', 
                 'tanggal_pendaftaran' => '2024-12-10',
                 'status_pendaftaran' => 'Diterima', 
                 'status_kelulusan' => 'Aktif',
