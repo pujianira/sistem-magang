@@ -99,9 +99,7 @@ class DaftarMagangController extends Controller
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'agama' => $request->agama,
                 'jenis_kelamin' => $request->jenis_kelamin,
-                'alamat' => $request->alamat,
-                'no_hp' => $request->no_hp,
-                'univ_sekolah' => $request->univ_sekolah,
+                'universitas_sekolah' => $request->univ_sekolah,
                 'nim_nisn' => $request->nim_nisn,
                 'nik' => $request->nik,
                 'jurusan' => $request->jurusan,
@@ -125,7 +123,10 @@ class DaftarMagangController extends Controller
 
         $user = User::find(Auth::id());
         $user->foto = $fotoPath;
+        $user->alamat = $request->alamat;
+        $user->no_hp = $request->no_hp;
         $user->save();
+
 
         // $user = Auth::user();
         // $user->foto = $fotoPath;
